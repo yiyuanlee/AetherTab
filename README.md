@@ -8,6 +8,22 @@ AetherTab 是一款极简、高颜值的 Chrome 标签页管理扩展程序。�
 
 ## 🚀 Features | 核心特性
 
+- **Larger Premium Link Cards / 大号网页链接卡片**
+  Saved webpages are rendered as larger, beautifully spaced horizontal cards. Featuring larger icons (32x32px container), bold text, and responsive lift-on-hover shadows.
+  保存的网页采用面积更大、间距更合理的大号卡片。配备大尺寸图标容器、加粗标题以及优雅的悬浮抬升阴影。
+
+- **Auto Domain Badging & HSL Coding / 自动网站标签与色彩编码**
+  Automatically extracts site domain and displays custom capsule badges (e.g. `ChatGPT`, `GitHub`). Badges are dynamically colored with transparent HSL tones based on a stable hash of the domain name.
+  自动识别域名并附带胶囊标签（如 `ChatGPT`、`GitHub`）。基于域名哈希算法自动生成唯一的 HSL 色调着色，使相同域名在视觉上归类一致。
+
+- **Group by Site (Domain Clustering) / 按网站自动分组**
+  A toggle button in the card header clusters tabs from the same domain into neat, collapsible folders (e.g., `Google Docs (3)`), making dense lists highly manageable.
+  卡片右上角新增“按网站分组”切换。点击后将同站点的标签页自动折叠归类至独立抽屉中，告别长 Session 难寻痛点。
+
+- **Collection Card Local Filter / 卡片级局部搜索过滤**
+  Toggle an inline search bar inside any collection card to filter tabs locally in real-time. Features carefully preserved input focus for smooth typing.
+  卡片右上角新增搜索按钮。点击展开卡片微型输入框，实时过滤检索本分类卡片内的链接，快速定位。
+
 - **Glassmorphic Aesthetics / 毛玻璃视觉设计**
   Deep space background radial gradients, translucent card panels with dynamic border glow shadows, and ultra-smooth micro-interactions.
   自适应深浅色背景流光渐变、半透明卡片容器与呼吸边缘发光微动效。
@@ -18,15 +34,11 @@ AetherTab 是一款极简、高颜值的 Chrome 标签页管理扩展程序。�
 
 - **Dynamic Clock & Custom Greetings / 实时时钟与问候**
   A beautiful large header displaying localized date, dynamic ticking clock, and natural greetings tailored to the hour.
-  主页面上方显示实时流光电子时钟，并根据清晨、午后、傍晚和深夜等不同时段，为您展示温馨的定制问候语。
+  主页面上方显示实时流光电子时钟，并根据不同时段为您展示定制问候语。
 
 - **Light & Dark Themes / 深浅双色主题**
   Toggle instantly between dark/galaxy mode and light/glass mode.
   支持一键在深邃星空暗色主题与明亮剔透亮色主题之间切换。
-
-- **Dual-Channel Filtering / 双通道搜索**
-  Equipped with dual search boxes to quickly filter open tabs in the sidebar or search across all saved collections.
-  配备侧边栏与主工作区两个搜索框，方便快速在海量活动标签与保存的分组中完成秒级定位。
 
 ---
 
