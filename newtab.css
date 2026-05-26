@@ -1406,3 +1406,47 @@ html[data-theme="light"] .weather-shimmer-line {
   }
 }
 
+/* Drag & Drop Reordering for Collections */
+.collection-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  cursor: grab;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin-right: 4px;
+}
+
+.collection-drag-handle:active {
+  cursor: grabbing;
+}
+
+.collection-drag-handle:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="light"] .collection-drag-handle:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.collection-drag-handle svg {
+  display: block;
+}
+
+.dragging-card {
+  opacity: 0.35 !important;
+  border: 2px dashed var(--accent-primary) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: scale(0.98);
+}
+
+.collection-card.drag-over-card {
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25) !important;
+  transform: translateY(-4px) scale(1.01);
+}
+

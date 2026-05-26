@@ -406,6 +406,9 @@ function renderCollections() {
     card.innerHTML = `
       <div class="collection-header-row">
         <div class="collection-title-container">
+          <div class="collection-drag-handle" title="Drag to reorder collection">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+          </div>
           <input type="text" class="collection-title-input" value="${escapeHtml(col.name)}" title="Double click to edit title">
           <span class="collection-badge">${activeTabsInCard.length}</span>
         </div>
@@ -619,19 +622,61 @@ function renderCollections() {
       }
     });
 
+    // Setup collection-level dragging on the drag handle
+    const dragHandle = card.querySelector('.collection-drag-handle');
+    dragHandle.draggable = true;
+    
+    dragHandle.addEventListener('dragstart', (e) => {
+      draggedElementData = {
+        type: 'collection',
+        id: col.id
+      };
+      card.classList.add('dragging-card');
+      e.dataTransfer.effectAllowed = 'move';
+      if (e.dataTransfer.setDragImage) {
+        // Project a translucent image of the full card
+        e.dataTransfer.setDragImage(card, 20, 20);
+      }
+    });
+
+    dragHandle.addEventListener('dragend', () => {
+      card.classList.remove('dragging-card');
+      document.querySelectorAll('.collection-card').forEach(c => {
+        c.classList.remove('drag-over-card');
+        c.classList.remove('drag-over');
+      });
+    });
+
     card.addEventListener('dragover', (e) => {
       e.preventDefault();
-      card.classList.add('drag-over');
+      if (draggedElementData) {
+        if (draggedElementData.type === 'collection') {
+          if (draggedElementData.id !== col.id) {
+            card.classList.add('drag-over-card');
+          }
+        } else {
+          card.classList.add('drag-over');
+        }
+      }
     });
 
     card.addEventListener('dragleave', () => {
       card.classList.remove('drag-over');
+      card.classList.remove('drag-over-card');
     });
 
     card.addEventListener('drop', (e) => {
       e.preventDefault();
       card.classList.remove('drag-over');
-      handleTabDropOnCollection(col.id);
+      card.classList.remove('drag-over-card');
+      
+      if (draggedElementData) {
+        if (draggedElementData.type === 'collection') {
+          handleCollectionDropOnCollection(draggedElementData.id, col.id);
+        } else {
+          handleTabDropOnCollection(col.id);
+        }
+      }
     });
 
     collectionsGrid.appendChild(card);
@@ -864,6 +909,21 @@ function handleTabDropOnCollection(targetCollectionId) {
   }
 
   draggedElementData = null;
+}
+
+// Handle drop to reorder collection cards
+function handleCollectionDropOnCollection(sourceId, targetId) {
+  if (sourceId === targetId) return;
+  
+  const sourceIndex = collections.findIndex(c => c.id === sourceId);
+  const targetIndex = collections.findIndex(c => c.id === targetId);
+  
+  if (sourceIndex !== -1 && targetIndex !== -1) {
+    const [movedCol] = collections.splice(sourceIndex, 1);
+    collections.splice(targetIndex, 0, movedCol);
+    persistData();
+    showToast(`Reordered collections`);
+  }
 }
 
 // Quick saves
