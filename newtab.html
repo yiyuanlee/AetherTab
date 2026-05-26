@@ -74,6 +74,58 @@
           </div>
         </div>
         
+        <!-- Weather Widget Card in the middle -->
+        <div class="weather-widget" id="weather-widget">
+          <!-- Setup View (default/no location) -->
+          <div class="weather-setup" id="weather-setup">
+            <div class="weather-setup-title">Today's Weather</div>
+            <div class="weather-setup-btns">
+              <button class="weather-btn" id="weather-gps-btn" title="Use current GPS location">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path><circle cx="12" cy="12" r="3"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line></svg>
+                GPS
+              </button>
+              <button class="weather-btn" id="weather-city-btn" title="Search city manually">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Search
+              </button>
+            </div>
+          </div>
+
+          <!-- Loading View -->
+          <div class="weather-loading hidden" id="weather-loading">
+            <div class="weather-shimmer-circle"></div>
+            <div class="weather-shimmer-lines">
+              <div class="weather-shimmer-line short"></div>
+              <div class="weather-shimmer-line"></div>
+            </div>
+          </div>
+
+          <!-- Display View -->
+          <div class="weather-display hidden" id="weather-display">
+            <div class="weather-icon-container" id="weather-icon">
+              <!-- SVG icon will be injected here -->
+            </div>
+            <div class="weather-details">
+              <div class="weather-temp-row">
+                <span class="weather-temp" id="weather-temp" title="Click to toggle Celsius / Fahrenheit">--°C</span>
+                <span class="weather-desc" id="weather-desc">Loading...</span>
+              </div>
+              <div class="weather-loc-row">
+                <span class="weather-location" id="weather-location" title="Click to change location">Detecting...</span>
+                <span class="weather-range" id="weather-range">-- / --</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inline Search Input -->
+          <div class="weather-search-input-container hidden" id="weather-search-container">
+            <input type="text" id="weather-search-input" placeholder="Enter city name..." title="Press Enter to search">
+            <button class="weather-search-close-btn" id="weather-search-close">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+        </div>
+        
         <div class="workspace-search-box">
           <svg viewBox="0 0 24 24" width="20" height="20" class="search-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           <input type="text" id="workspace-search" placeholder="Search saved collections and tabs...">
