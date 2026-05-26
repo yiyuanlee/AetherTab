@@ -8,6 +8,10 @@ AetherTab 是一款极简、高颜值的 Chrome 标签页管理扩展程序。�
 
 ## 🚀 Features | 核心特性
 
+- **Interactive Weather Widget / 实时天气情况卡片**
+  Displays current weather info with a glowing glassmorphic card in the header. Supports browser geolocation detection (GPS) and manual city searches. Includes clickable Celsius/Fahrenheit toggle, local storage caching, and dynamic light colors for weather statuses.
+  顶部中央展示实时天气卡片。支持一键获取浏览器 GPS 定位或手动输入搜索城市。气温支持摄氏/华氏度点击切换，并自动缓存与渲染对应天气色调的虚化背光。
+
 - **Larger Premium Link Cards / 大号网页链接卡片**
   Saved webpages are rendered as larger, beautifully spaced horizontal cards. Featuring larger icons (32x32px container), bold text, and responsive lift-on-hover shadows.
   保存的网页采用面积更大、间距更合理的大号卡片。配备大尺寸图标容器、加粗标题以及优雅的悬浮抬升阴影。
