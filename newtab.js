@@ -35,6 +35,12 @@ let activeTabs = [];
 let isChromeExtension = typeof chrome !== 'undefined' && chrome.tabs && chrome.storage;
 let draggedElementData = null; // Stores dragging info: { type: 'active'|'saved', tabId: int, collectionId: string, index: int }
 
+// Card-level UI search and group states
+const cardSearchQueries = {};       // collectionId -> string
+const cardSearchActive = {};        // collectionId -> boolean
+const collapsedDomainGroups = {};   // "collectionId-domain" -> boolean
+
+
 // Base64 SVG constants to prevent HTML quotes clashing
 const GLOBE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`;
 const GLOBE_FAVICON_DATA_URL = `data:image/svg+xml;base64,${btoa(GLOBE_SVG)}`;
@@ -291,20 +297,77 @@ function renderActiveTabs() {
   });
 }
 
+// Helper to extract clean site name for badge
+function getDomainBadgeName(url, domain) {
+  if (!url) return 'Link';
+  const lowercaseUrl = url.toLowerCase();
+  
+  if (lowercaseUrl.includes('google.com/search')) return 'Google Search';
+  if (domain.includes('docs.google.com')) {
+    if (lowercaseUrl.includes('/document/')) return 'Google Docs';
+    if (lowercaseUrl.includes('/presentation/')) return 'Google Slides';
+    if (lowercaseUrl.includes('/spreadsheets/')) return 'Google Sheets';
+    return 'Google Workspace';
+  }
+  if (domain.includes('drive.google.com')) return 'Google Drive';
+  if (domain.includes('github.com')) return 'GitHub';
+  if (domain.includes('youtube.com')) return 'YouTube';
+  if (domain.includes('stackoverflow.com')) return 'Stack Overflow';
+  if (domain.includes('chatgpt.com') || domain.includes('chat.openai.com')) return 'ChatGPT';
+  if (domain.includes('gemini.google.com')) return 'Gemini';
+  if (domain.includes('grok.com')) return 'Grok';
+  if (domain.includes('deepseek.com')) return 'DeepSeek';
+  if (domain.includes('claude.ai')) return 'Claude';
+  if (domain.includes('doubao.com')) return 'Doubao';
+  if (domain.includes('notion.so') || domain.includes('notion.site')) return 'Notion';
+  if (domain.includes('bilibili.com')) return 'Bilibili';
+  if (domain.includes('twitter.com') || domain.includes('x.com')) return 'Twitter/X';
+  
+  // Default clean hostname formatting
+  let name = domain.replace(/^www\./, '');
+  const dotIndex = name.lastIndexOf('.');
+  if (dotIndex > 0) {
+    name = name.substring(0, dotIndex);
+  }
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+// Helper to generate a stable, beautiful HSL color from domain string
+function getDomainColor(domain) {
+  let hash = 0;
+  for (let i = 0; i < domain.length; i++) {
+    hash = domain.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const hue = Math.abs(hash) % 360;
+  
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  if (currentTheme === 'dark') {
+    return {
+      bg: `hsla(${hue}, 70%, 45%, 0.15)`,
+      color: `hsla(${hue}, 90%, 75%, 1)`,
+      border: `hsla(${hue}, 70%, 50%, 0.2)`
+    };
+  } else {
+    return {
+      bg: `hsla(${hue}, 70%, 45%, 0.08)`,
+      color: `hsla(${hue}, 90%, 35%, 1)`,
+      border: `hsla(${hue}, 70%, 40%, 0.15)`
+    };
+  }
+}
+
 // Render Collections Grid
 function renderCollections() {
-  const filterQuery = workspaceSearchInput.value.toLowerCase().trim();
+  const mainFilter = workspaceSearchInput.value.toLowerCase().trim();
   collectionsGrid.innerHTML = '';
 
   const filteredCollections = collections.map(col => {
-    // If collection title matches, keep all its tabs
-    if (col.name.toLowerCase().includes(filterQuery)) {
+    if (col.name.toLowerCase().includes(mainFilter)) {
       return col;
     }
-    // Otherwise filter its tabs
     const matchingTabs = col.tabs.filter(tab => 
-      tab.title.toLowerCase().includes(filterQuery) || 
-      tab.url.toLowerCase().includes(filterQuery)
+      tab.title.toLowerCase().includes(mainFilter) || 
+      tab.url.toLowerCase().includes(mainFilter)
     );
     if (matchingTabs.length > 0) {
       return { ...col, tabs: matchingTabs };
@@ -330,13 +393,31 @@ function renderCollections() {
     card.className = 'collection-card';
     card.dataset.id = col.id;
 
+    const isGrouped = col.isGrouped || false;
+    const isSearchActive = cardSearchActive[col.id] || false;
+    const localQuery = (cardSearchQueries[col.id] || '').toLowerCase().trim();
+
+    const activeTabsInCard = col.tabs.filter(tab => {
+      if (localQuery === '') return true;
+      return tab.title.toLowerCase().includes(localQuery) || tab.url.toLowerCase().includes(localQuery);
+    });
+
     card.innerHTML = `
       <div class="collection-header-row">
         <div class="collection-title-container">
           <input type="text" class="collection-title-input" value="${escapeHtml(col.name)}" title="Double click to edit title">
-          <span class="collection-badge">${col.tabs.length}</span>
+          <span class="collection-badge">${activeTabsInCard.length}</span>
         </div>
         <div class="collection-actions">
+          <button class="collection-action-btn toggle-card-search-btn ${isSearchActive ? 'active' : ''}" title="Search in collection">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <button class="collection-action-btn toggle-group-btn ${isGrouped ? 'active' : ''}" title="${isGrouped ? 'Show as List' : 'Group by Site'}">
+            ${isGrouped ? 
+              `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>` :
+              `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>`
+            }
+          </button>
           <button class="collection-action-btn add-custom-link-btn" title="Add custom link">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </button>
@@ -348,14 +429,20 @@ function renderCollections() {
           </button>
         </div>
       </div>
+      
+      <div class="collection-card-search ${isSearchActive ? '' : 'hidden'}">
+        <input type="text" placeholder="Filter inside this collection..." value="${escapeHtml(cardSearchQueries[col.id] || '')}">
+      </div>
+
       <div class="collection-tabs-list" dataset-id="${col.id}">
         <!-- Saved tabs in collection -->
       </div>
     `;
 
-    // Populate Saved Tabs
     const tabsListContainer = card.querySelector('.collection-tabs-list');
-    col.tabs.forEach((tab, index) => {
+
+    // Create a tab element helper
+    function createTabEl(tab, index) {
       const tabEl = document.createElement('div');
       tabEl.className = 'tab-item';
       tabEl.draggable = true;
@@ -363,14 +450,20 @@ function renderCollections() {
       tabEl.dataset.collectionId = col.id;
 
       const faviconUrl = getFaviconUrl(tab.url);
+      const domain = cleanUrl(tab.url).split('/')[0];
+      const badgeName = getDomainBadgeName(tab.url, domain);
+      const badgeColor = getDomainColor(domain);
 
       tabEl.innerHTML = `
         <div class="tab-favicon">
-          <img src="${faviconUrl}" width="16" height="16" onerror="this.onerror=null; this.src='${FALLBACK_FAVICON_DATA_URL}'">
+          <img src="${faviconUrl}" width="20" height="20" onerror="this.onerror=null; this.src='${FALLBACK_FAVICON_DATA_URL}'">
         </div>
         <div class="tab-info">
-          <div class="tab-title">${escapeHtml(tab.title)}</div>
-          <div class="tab-url">${escapeHtml(cleanUrl(tab.url))}</div>
+          <div class="tab-title" title="${escapeHtml(tab.title)}">${escapeHtml(tab.title)}</div>
+          <div class="tab-meta-row">
+            <span class="domain-badge" style="background: ${badgeColor.bg}; color: ${badgeColor.color}; border: 1px solid ${badgeColor.border}">${escapeHtml(badgeName)}</span>
+            <div class="tab-url" title="${escapeHtml(tab.url)}">${escapeHtml(cleanUrl(tab.url))}</div>
+          </div>
         </div>
         <div class="tab-actions">
           <button class="tab-action-btn delete-saved-tab delete-tab-btn" title="Remove link">
@@ -379,7 +472,6 @@ function renderCollections() {
         </div>
       `;
 
-      // Drag saved tabs (for re-organizing)
       tabEl.addEventListener('dragstart', (e) => {
         tabEl.classList.add('dragging');
         draggedElementData = {
@@ -397,22 +489,110 @@ function renderCollections() {
         tabEl.classList.remove('dragging');
       });
 
-      // Click to open tab
       tabEl.addEventListener('click', (e) => {
         if (e.target.closest('.delete-saved-tab')) return;
         openTabUrl(tab.url);
       });
 
-      // Delete saved tab click
       tabEl.querySelector('.delete-saved-tab').addEventListener('click', (e) => {
         e.stopPropagation();
         deleteSavedTab(col.id, index);
       });
 
-      tabsListContainer.appendChild(tabEl);
+      return tabEl;
+    }
+
+    if (isGrouped && activeTabsInCard.length > 0) {
+      const groups = {};
+      activeTabsInCard.forEach((tab) => {
+        const originalIndex = col.tabs.findIndex(t => t === tab);
+        const domain = cleanUrl(tab.url).split('/')[0];
+        if (!groups[domain]) {
+          groups[domain] = [];
+        }
+        groups[domain].push({ tab, originalIndex });
+      });
+
+      Object.keys(groups).forEach(domain => {
+        const domainTabs = groups[domain];
+        const groupKey = `${col.id}-${domain}`;
+        const isCollapsed = collapsedDomainGroups[groupKey] || false;
+
+        const groupDiv = document.createElement('div');
+        groupDiv.className = `domain-group ${isCollapsed ? 'collapsed' : ''}`;
+
+        const badgeName = getDomainBadgeName(domainTabs[0].tab.url, domain);
+        const faviconUrl = getFaviconUrl(domainTabs[0].tab.url);
+
+        groupDiv.innerHTML = `
+          <div class="domain-group-header">
+            <div class="domain-group-title">
+              <img src="${faviconUrl}" onerror="this.onerror=null; this.src='${FALLBACK_FAVICON_DATA_URL}'">
+              <span>${escapeHtml(badgeName)}</span>
+            </div>
+            <div class="domain-group-actions">
+              <span class="domain-group-count">${domainTabs.length}</span>
+              <div class="domain-group-caret">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </div>
+            </div>
+          </div>
+          <div class="domain-group-list">
+            <!-- Grouped tabs -->
+          </div>
+        `;
+
+        const groupListContainer = groupDiv.querySelector('.domain-group-list');
+        domainTabs.forEach(({ tab, originalIndex }) => {
+          const tabEl = createTabEl(tab, originalIndex);
+          groupListContainer.appendChild(tabEl);
+        });
+
+        groupDiv.querySelector('.domain-group-header').addEventListener('click', () => {
+          const collapsedState = !groupDiv.classList.contains('collapsed');
+          groupDiv.classList.toggle('collapsed');
+          collapsedDomainGroups[groupKey] = collapsedState;
+        });
+
+        tabsListContainer.appendChild(groupDiv);
+      });
+    } else {
+      activeTabsInCard.forEach((tab) => {
+        const originalIndex = col.tabs.findIndex(t => t === tab);
+        const tabEl = createTabEl(tab, originalIndex);
+        tabsListContainer.appendChild(tabEl);
+      });
+    }
+
+    // Set up search, group, edit and delete listeners
+    const searchInput = card.querySelector('.collection-card-search input');
+    searchInput.addEventListener('input', (e) => {
+      cardSearchQueries[col.id] = e.target.value;
+      renderCardTabsOnly(col.id, card);
     });
 
-    // Collection title renaming events
+    card.querySelector('.toggle-card-search-btn').addEventListener('click', () => {
+      const searchContainer = card.querySelector('.collection-card-search');
+      const active = searchContainer.classList.contains('hidden');
+      
+      cardSearchActive[col.id] = active;
+      searchContainer.classList.toggle('hidden');
+      
+      if (active) {
+        const input = searchContainer.querySelector('input');
+        input.focus();
+      } else {
+        searchContainer.querySelector('input').value = '';
+        cardSearchQueries[col.id] = '';
+        renderCardTabsOnly(col.id, card);
+      }
+    });
+
+    card.querySelector('.toggle-group-btn').addEventListener('click', () => {
+      col.isGrouped = !col.isGrouped;
+      persistData();
+    });
+
     const titleInput = card.querySelector('.collection-title-input');
     titleInput.addEventListener('change', (e) => {
       renameCollection(col.id, e.target.value.trim());
@@ -424,24 +604,20 @@ function renderCollections() {
       }
     });
 
-    // Add manual link click
     card.querySelector('.add-custom-link-btn').addEventListener('click', () => {
       openCustomTabModal(col.id);
     });
 
-    // Open all tabs click
     card.querySelector('.open-all-tabs-btn').addEventListener('click', () => {
       openAllTabsInCollection(col.id);
     });
 
-    // Delete collection click
     card.querySelector('.delete-collection-btn').addEventListener('click', () => {
       if (confirm(`Are you sure you want to delete the collection "${col.name}"?`)) {
         deleteCollection(col.id);
       }
     });
 
-    // Drag over card events (for drop zone)
     card.addEventListener('dragover', (e) => {
       e.preventDefault();
       card.classList.add('drag-over');
@@ -459,6 +635,146 @@ function renderCollections() {
 
     collectionsGrid.appendChild(card);
   });
+}
+
+// Helper to re-render ONLY the tabs list inside a collection card (prevents search input blur)
+function renderCardTabsOnly(collectionId, cardElement) {
+  const col = collections.find(c => c.id === collectionId);
+  if (!col) return;
+
+  const localQuery = (cardSearchQueries[collectionId] || '').toLowerCase().trim();
+  const tabsListContainer = cardElement.querySelector('.collection-tabs-list');
+  const countBadge = cardElement.querySelector('.collection-badge');
+  
+  const activeTabsInCard = col.tabs.filter(tab => {
+    if (localQuery === '') return true;
+    return tab.title.toLowerCase().includes(localQuery) || tab.url.toLowerCase().includes(localQuery);
+  });
+
+  countBadge.textContent = activeTabsInCard.length;
+  tabsListContainer.innerHTML = '';
+
+  function createTabEl(tab, index) {
+    const tabEl = document.createElement('div');
+    tabEl.className = 'tab-item';
+    tabEl.draggable = true;
+    tabEl.dataset.index = index;
+    tabEl.dataset.collectionId = col.id;
+
+    const faviconUrl = getFaviconUrl(tab.url);
+    const domain = cleanUrl(tab.url).split('/')[0];
+    const badgeName = getDomainBadgeName(tab.url, domain);
+    const badgeColor = getDomainColor(domain);
+
+    tabEl.innerHTML = `
+      <div class="tab-favicon">
+        <img src="${faviconUrl}" width="20" height="20" onerror="this.onerror=null; this.src='${FALLBACK_FAVICON_DATA_URL}'">
+      </div>
+      <div class="tab-info">
+        <div class="tab-title" title="${escapeHtml(tab.title)}">${escapeHtml(tab.title)}</div>
+        <div class="tab-meta-row">
+          <span class="domain-badge" style="background: ${badgeColor.bg}; color: ${badgeColor.color}; border: 1px solid ${badgeColor.border}">${escapeHtml(badgeName)}</span>
+          <div class="tab-url" title="${escapeHtml(tab.url)}">${escapeHtml(cleanUrl(tab.url))}</div>
+        </div>
+      </div>
+      <div class="tab-actions">
+        <button class="tab-action-btn delete-saved-tab delete-tab-btn" title="Remove link">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    `;
+
+    tabEl.addEventListener('dragstart', (e) => {
+      tabEl.classList.add('dragging');
+      draggedElementData = {
+        type: 'saved',
+        collectionId: col.id,
+        index: index,
+        title: tab.title,
+        url: tab.url
+      };
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', tab.url);
+    });
+
+    tabEl.addEventListener('dragend', () => {
+      tabEl.classList.remove('dragging');
+    });
+
+    tabEl.addEventListener('click', (e) => {
+      if (e.target.closest('.delete-saved-tab')) return;
+      openTabUrl(tab.url);
+    });
+
+    tabEl.querySelector('.delete-saved-tab').addEventListener('click', (e) => {
+      e.stopPropagation();
+      deleteSavedTab(col.id, index);
+    });
+
+    return tabEl;
+  }
+
+  if (col.isGrouped && activeTabsInCard.length > 0) {
+    const groups = {};
+    activeTabsInCard.forEach((tab) => {
+      const originalIndex = col.tabs.findIndex(t => t === tab);
+      const domain = cleanUrl(tab.url).split('/')[0];
+      if (!groups[domain]) {
+        groups[domain] = [];
+      }
+      groups[domain].push({ tab, originalIndex });
+    });
+
+    Object.keys(groups).forEach(domain => {
+      const domainTabs = groups[domain];
+      const groupKey = `${col.id}-${domain}`;
+      const isCollapsed = collapsedDomainGroups[groupKey] || false;
+
+      const groupDiv = document.createElement('div');
+      groupDiv.className = `domain-group ${isCollapsed ? 'collapsed' : ''}`;
+
+      const badgeName = getDomainBadgeName(domainTabs[0].tab.url, domain);
+      const faviconUrl = getFaviconUrl(domainTabs[0].tab.url);
+
+      groupDiv.innerHTML = `
+        <div class="domain-group-header">
+          <div class="domain-group-title">
+            <img src="${faviconUrl}" onerror="this.onerror=null; this.src='${FALLBACK_FAVICON_DATA_URL}'">
+            <span>${escapeHtml(badgeName)}</span>
+          </div>
+          <div class="domain-group-actions">
+            <span class="domain-group-count">${domainTabs.length}</span>
+            <div class="domain-group-caret">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+        </div>
+        <div class="domain-group-list">
+          <!-- Grouped tabs -->
+        </div>
+      `;
+
+      const groupListContainer = groupDiv.querySelector('.domain-group-list');
+      domainTabs.forEach(({ tab, originalIndex }) => {
+        const tabEl = createTabEl(tab, originalIndex);
+        groupListContainer.appendChild(tabEl);
+      });
+
+      groupDiv.querySelector('.domain-group-header').addEventListener('click', () => {
+        const collapsedState = !groupDiv.classList.contains('collapsed');
+        groupDiv.classList.toggle('collapsed');
+        collapsedDomainGroups[groupKey] = collapsedState;
+      });
+
+      tabsListContainer.appendChild(groupDiv);
+    });
+  } else {
+    activeTabsInCard.forEach((tab) => {
+      const originalIndex = col.tabs.findIndex(t => t === tab);
+      const tabEl = createTabEl(tab, originalIndex);
+      tabsListContainer.appendChild(tabEl);
+    });
+  }
 }
 
 // Data Mutation Operations

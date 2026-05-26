@@ -900,3 +900,202 @@ html[data-theme="light"] .toast {
   opacity: 0.4;
   transform: scale(0.98);
 }
+
+/* Saved tabs inside collections grid (Larger premium link cards) */
+.collection-tabs-list .tab-item {
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+html[data-theme="light"] .collection-tabs-list .tab-item {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(0, 0, 0, 0.03);
+}
+
+.collection-tabs-list .tab-item:hover {
+  background: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.08);
+}
+
+.collection-tabs-list .tab-favicon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+html[data-theme="light"] .collection-tabs-list .tab-favicon {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.04);
+}
+
+.collection-tabs-list .tab-favicon img {
+  width: 20px;
+  height: 20px;
+}
+
+.collection-tabs-list .tab-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.collection-tabs-list .tab-url {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Domain Badges styling */
+.domain-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.tab-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+/* Collection Card Search Input */
+.collection-card-search {
+  padding: 0 8px 12px 8px;
+  animation: slide-down 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.collection-card-search input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 12px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.collection-card-search input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--input-focus);
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Domain grouping layout */
+.domain-group {
+  margin-bottom: 10px;
+}
+
+.domain-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 6px;
+}
+
+html[data-theme="light"] .domain-group-header {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.03);
+}
+
+.domain-group-header:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="light"] .domain-group-header:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.domain-group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.domain-group-title img {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.domain-group-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.domain-group-count {
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+html[data-theme="light"] .domain-group-count {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.domain-group-caret {
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.domain-group.collapsed .domain-group-caret {
+  transform: rotate(-90deg);
+}
+
+.domain-group-list {
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: all 0.2s ease;
+}
+
+.domain-group.collapsed .domain-group-list {
+  display: none;
+}
