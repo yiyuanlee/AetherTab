@@ -35,6 +35,14 @@ let activeTabs = [];
 let isChromeExtension = typeof chrome !== 'undefined' && chrome.tabs && chrome.storage;
 let draggedElementData = null; // Stores dragging info: { type: 'active'|'saved', tabId: int, collectionId: string, index: int }
 
+// Base64 SVG constants to prevent HTML quotes clashing
+const GLOBE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`;
+const GLOBE_FAVICON_DATA_URL = `data:image/svg+xml;base64,${btoa(GLOBE_SVG)}`;
+
+const FALLBACK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>`;
+const FALLBACK_FAVICON_DATA_URL = `data:image/svg+xml;base64,${btoa(FALLBACK_SVG)}`;
+
+
 // DOM Elements
 const sidebar = document.getElementById('sidebar');
 const toggleSidebarBtn = document.getElementById('toggle-sidebar');
@@ -181,8 +189,7 @@ function getQueryParam(name) {
 function getFaviconUrl(url) {
   if (!url) return '';
   if (url.startsWith('chrome://') || url.startsWith('chrome-extension://') || url.startsWith('edge://')) {
-    // Fallback globe SVG path
-    return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`;
+    return GLOBE_FAVICON_DATA_URL;
   }
   if (isChromeExtension) {
     return `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(url)}&size=32`;
@@ -230,7 +237,7 @@ function renderActiveTabs() {
     
     item.innerHTML = `
       <div class="tab-favicon">
-        <img src="${faviconUrl}" width="16" height="16" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' width=\'16\' height=\'16\' fill=\'none\' stroke=\'%2394a3b8\' stroke-width=\'2\'><circle cx=\'12\' cy=\'12\' r=\'10\'></circle></svg>'">
+        <img src="${faviconUrl}" width="16" height="16" onerror="this.onerror=null; this.src='${FALLBACK_FAVICON_DATA_URL}'">
       </div>
       <div class="tab-info">
         <div class="tab-title">${escapeHtml(tab.title)}</div>
@@ -359,7 +366,7 @@ function renderCollections() {
 
       tabEl.innerHTML = `
         <div class="tab-favicon">
-          <img src="${faviconUrl}" width="16" height="16" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' width=\'16\' height=\'16\' fill=\'none\' stroke=\'%2394a3b8\' stroke-width=\'2\'><circle cx=\'12\' cy=\'12\' r=\'10\'></circle></svg>'">
+          <img src="${faviconUrl}" width="16" height="16" onerror="this.onerror=null; this.src='${FALLBACK_FAVICON_DATA_URL}'">
         </div>
         <div class="tab-info">
           <div class="tab-title">${escapeHtml(tab.title)}</div>
