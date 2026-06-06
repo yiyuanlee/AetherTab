@@ -81,7 +81,6 @@ html[data-theme="light"] {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  user-select: none;
 }
 
 body {
@@ -454,6 +453,26 @@ html[data-theme="light"] .theme-toggle-btn .moon-icon {
   flex-direction: column;
   min-width: 0;
   transition: padding-left 0.4s ease;
+}
+
+.main-content.sidebar-collapsed {
+  padding-left: 40px;
+}
+
+.tab-item,
+.collection-drag-handle,
+.collection-action-btn,
+.tab-action-btn,
+.btn {
+  user-select: none;
+}
+
+.tab-title,
+.tab-url,
+.collection-title-input,
+input,
+textarea {
+  user-select: text;
 }
 
 .workspace-header {

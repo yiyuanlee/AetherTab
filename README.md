@@ -46,6 +46,45 @@ AetherTab 是一款极简、高颜值的 Chrome 标签页管理扩展程序。�
 
 ---
 
+## 🧱 Project Structure | 项目结构
+
+```
+AetherTab/
+├── js/
+│   ├── app.js          # Entry point
+│   ├── collections.js  # Data CRUD & session save
+│   ├── constants.js    # Mock data & config constants
+│   ├── events.js       # Event listeners
+│   ├── modal.js        # Custom link modal
+│   ├── render.js       # DOM rendering (single createTabEl)
+│   ├── state.js        # Shared app state & DOM refs
+│   ├── storage.js      # chrome.storage / localStorage adapter
+│   ├── tabs.js         # Active tab sync (debounced)
+│   ├── toast.js        # Toast notifications
+│   ├── utils.js        # Helpers (escapeHtml, debounce, favicon)
+│   ├── weather.js      # Weather widget with 30-min cache
+│   └── widgets.js      # Clock & theme
+├── scripts/build.mjs   # Optional esbuild bundle → dist/
+├── newtab.html
+├── newtab.css
+└── manifest.json
+```
+
+### Development | 开发
+
+```bash
+# Generate extension icons
+npm run icons
+
+# Optional: bundle modules into dist/js/app.js
+npm install
+npm run build
+```
+
+Load the project folder as an unpacked extension in `chrome://extensions/`. ES modules work directly — no build step required for daily development.
+
+---
+
 ## 🛠️ Installation | 安装指引
 
 To install AetherTab in Google Chrome:

@@ -9,3 +9,9 @@ Thumbs.db
 
 # User specific or log files
 *.log
+
+# Dependencies
+node_modules/
+
+# Build output (optional bundle)
+dist/

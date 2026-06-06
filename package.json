@@ -1,0 +1,14 @@
+{
+  "name": "aethertab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A premium, glassmorphic Chrome tab manager",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "icons": "python generate_icons.py icons",
+    "dev": "echo Load unpacked in chrome://extensions — no dev server needed"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
