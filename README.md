@@ -44,6 +44,10 @@ AetherTab 是一款极简、高颜值的 Chrome 标签页管理扩展程序。�
   Toggle instantly between dark/galaxy mode and light/glass mode.
   支持一键在深邃星空暗色主题与明亮剔透亮色主题之间切换。
 
+- **Cross-Device Sync / 多设备同步**
+  Enable Chrome Sync to keep collections, theme, and weather preferences consistent across all browsers signed into the same Google account. Large datasets are automatically chunked to fit Chrome sync quotas. A status indicator in the sidebar shows sync state in real time.
+  开启侧边栏「Sync」按钮后，收藏夹、主题与天气偏好会通过 Chrome 账号同步到所有已登录设备。大数据自动分块存储，状态指示灯实时显示同步进度。
+
 ---
 
 ## 🧱 Project Structure | 项目结构
@@ -58,7 +62,8 @@ AetherTab/
 │   ├── modal.js        # Custom link modal
 │   ├── render.js       # DOM rendering (single createTabEl)
 │   ├── state.js        # Shared app state & DOM refs
-│   ├── storage.js      # chrome.storage / localStorage adapter
+│   ├── storage.js      # chrome.storage sync/local adapter with chunking
+│   ├── sync.js         # Cross-device sync engine & UI state
 │   ├── tabs.js         # Active tab sync (debounced)
 │   ├── toast.js        # Toast notifications
 │   ├── utils.js        # Helpers (escapeHtml, debounce, favicon)

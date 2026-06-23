@@ -1,14 +1,14 @@
 import { MOCK_COLLECTIONS, MOCK_ACTIVE_TABS } from './constants.js';
-import { isChromeExtension, storageGet, storageSet } from './storage.js';
-import { state } from './state.js';
+import { isChromeExtension, loadCollections } from './storage.js';
+import { persistCollectionsWithSync, restoreFavicons } from './sync.js';
 import { getFaviconUrl } from './utils.js';
+import { state } from './state.js';
 import { showToast } from './toast.js';
 import { closeBrowserTab, openTabUrl, refreshActiveTabsNow } from './tabs.js';
 
 export async function loadData() {
   if (isChromeExtension) {
-    const result = await storageGet(['collections']);
-    state.collections = result.collections || [];
+    state.collections = restoreFavicons(await loadCollections());
     const { renderCollections } = await import('./render.js');
     renderCollections();
     const { loadActiveTabs } = await import('./tabs.js');
@@ -24,15 +24,7 @@ export async function loadData() {
 }
 
 export function persistData(options = {}) {
-  const { rerender = true } = options;
-
-  const savePromise = storageSet({ collections: state.collections });
-
-  if (rerender) {
-    savePromise.then(() => import('./render.js').then(({ renderCollections }) => renderCollections()));
-  }
-
-  return savePromise;
+  return persistCollectionsWithSync(state.collections, options);
 }
 
 export function createNewCollection(name = 'Untitled Collection') {

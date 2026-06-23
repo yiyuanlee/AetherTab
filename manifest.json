@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "AetherTab",
-  "version": "1.0.0",
-  "description": "A premium, glassmorphic tab manager to organize your workspace beautifully.",
+  "version": "1.1.0",
+  "description": "A premium, glassmorphic tab manager to organize your workspace beautifully — with cross-device sync.",
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },

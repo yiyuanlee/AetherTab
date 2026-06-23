@@ -402,6 +402,62 @@ html[data-theme="light"] .expand-sidebar-btn {
 .sidebar-footer {
   padding: 16px 20px;
   border-top: 1px solid var(--sidebar-border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sync-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sync-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-color: var(--input-border);
+}
+
+.sync-toggle-btn .sync-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: auto;
+  background: var(--text-muted);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+}
+
+.sync-toggle-btn.sync-on .sync-status-dot {
+  background: var(--success);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.45);
+}
+
+.sync-toggle-btn.sync-pending .sync-status-dot {
+  background: #f59e0b;
+  animation: sync-pulse 1.2s ease-in-out infinite;
+}
+
+.sync-toggle-btn.sync-error .sync-status-dot {
+  background: var(--danger);
+  box-shadow: 0 0 8px rgba(244, 63, 94, 0.35);
+}
+
+@keyframes sync-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.85); }
 }
 
 .theme-toggle-btn {

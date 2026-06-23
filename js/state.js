@@ -13,6 +13,7 @@ export const dom = {
   toggleSidebarBtn: null,
   expandSidebarBtn: null,
   themeToggleBtn: null,
+  syncToggleBtn: null,
   activeTabsList: null,
   activeTabCount: null,
   activeSearchInput: null,
@@ -34,6 +35,7 @@ export function bindDomElements() {
   dom.toggleSidebarBtn = document.getElementById('toggle-sidebar');
   dom.expandSidebarBtn = document.getElementById('expand-sidebar');
   dom.themeToggleBtn = document.getElementById('theme-toggle');
+  dom.syncToggleBtn = document.getElementById('sync-toggle');
   dom.activeTabsList = document.getElementById('active-tabs-list');
   dom.activeTabCount = document.getElementById('active-tab-count');
   dom.activeSearchInput = document.getElementById('active-search');

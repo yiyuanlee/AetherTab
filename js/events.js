@@ -1,6 +1,7 @@
 import { isChromeExtension } from './storage.js';
 import { dom } from './state.js';
 import { createNewCollection, saveSession, loadData } from './collections.js';
+import { initSync, toggleSync } from './sync.js';
 import { toggleTheme } from './widgets.js';
 import { renderActiveTabs, renderCollections } from './render.js';
 import { refreshActiveTabs } from './tabs.js';
@@ -25,8 +26,10 @@ export function setupEventListeners() {
   dom.newCollectionBtn.addEventListener('click', () => createNewCollection());
   dom.saveSessionBtn.addEventListener('click', saveSession);
   dom.themeToggleBtn.addEventListener('click', toggleTheme);
+  dom.syncToggleBtn?.addEventListener('click', toggleSync);
 
   setupModalListeners();
+  initSync();
 
   if (isChromeExtension) {
     chrome.tabs.onCreated.addListener(refreshActiveTabs);
