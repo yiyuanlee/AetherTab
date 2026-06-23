@@ -10,6 +10,7 @@ export const SYNCABLE_KEYS = new Set([
   SYNC_ENABLED_KEY,
   SYNC_META_KEY,
   'theme',
+  'colorScheme',
   'weatherLocation',
   'weatherUnit',
 ]);

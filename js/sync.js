@@ -12,7 +12,7 @@ import {
 import { state } from './state.js';
 import { getFaviconUrl } from './utils.js';
 import { showToast } from './toast.js';
-import { setTheme } from './widgets.js';
+import { setTheme, setColorScheme } from './widgets.js';
 
 let syncStatus = 'off';
 let applyingRemoteUpdate = false;
@@ -120,6 +120,10 @@ async function handleRemoteChanges(changes, areaName) {
       setTheme(changes.theme.newValue);
     }
 
+    if (changes.colorScheme?.newValue) {
+      setColorScheme(changes.colorScheme.newValue);
+    }
+
     if (isCollectionsChange(changes)) {
       setSyncStatus('pending');
       try {
@@ -176,10 +180,11 @@ export async function toggleSync() {
         source: 'enable-sync',
       });
 
-      const theme = (await chrome.storage.local.get(['theme'])).theme;
+      const { theme, colorScheme } = await chrome.storage.local.get(['theme', 'colorScheme']);
       const weather = await chrome.storage.local.get(['weatherLocation', 'weatherUnit']);
       const syncPayload = {};
       if (theme) syncPayload.theme = theme;
+      if (colorScheme) syncPayload.colorScheme = colorScheme;
       if (weather.weatherLocation) syncPayload.weatherLocation = weather.weatherLocation;
       if (weather.weatherUnit) syncPayload.weatherUnit = weather.weatherUnit;
       if (Object.keys(syncPayload).length > 0) {

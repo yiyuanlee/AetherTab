@@ -1,17 +1,58 @@
 import { storageGet, storageSet } from './storage.js';
 import { dom } from './state.js';
+import { applyColorSchemeTokens } from './themes.js';
 
-export async function initTheme() {
-  const result = await storageGet(['theme']);
-  setTheme(result.theme || 'dark');
+export const COLOR_SCHEMES = ['default', 'argentina', 'portugal', 'france', 'brazil', 'germany', 'england', 'spain'];
+
+function getThemeMode() {
+  return document.documentElement.getAttribute('data-theme') || 'dark';
 }
 
-export function setTheme(theme) {
+function getColorScheme() {
+  return document.documentElement.getAttribute('data-color-scheme') || 'default';
+}
+
+function refreshThemeTokens() {
+  applyColorSchemeTokens(getColorScheme(), getThemeMode());
+}
+
+function triggerThemeTransition() {
+  document.documentElement.classList.add('theme-switching');
+  clearTimeout(triggerThemeTransition._timer);
+  triggerThemeTransition._timer = setTimeout(() => {
+    document.documentElement.classList.remove('theme-switching');
+  }, 500);
+}
+
+export async function initTheme() {
+  const result = await storageGet(['theme', 'colorScheme']);
+  const theme = result.theme || 'dark';
+  const scheme = COLOR_SCHEMES.includes(result.colorScheme) ? result.colorScheme : 'default';
+
+  document.documentElement.setAttribute('data-theme', theme);
+  document.documentElement.setAttribute('data-color-scheme', scheme);
+
+  const themeLabel = dom.themeToggleBtn?.querySelector('.theme-label');
+  if (themeLabel) {
+    themeLabel.textContent = theme === 'dark' ? 'Dark Mode' : 'Light Mode';
+  }
+
+  dom.colorSchemePicker?.querySelectorAll('.color-scheme-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.scheme === scheme);
+    btn.setAttribute('aria-checked', btn.dataset.scheme === scheme ? 'true' : 'false');
+  });
+
+  refreshThemeTokens();
+}
+
+export function setTheme(theme, options = {}) {
   document.documentElement.setAttribute('data-theme', theme);
   const themeLabel = dom.themeToggleBtn?.querySelector('.theme-label');
   if (themeLabel) {
     themeLabel.textContent = theme === 'dark' ? 'Dark Mode' : 'Light Mode';
   }
+  refreshThemeTokens();
+  if (options.animate !== false) triggerThemeTransition();
 }
 
 export async function toggleTheme() {
@@ -19,6 +60,24 @@ export async function toggleTheme() {
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
   setTheme(newTheme);
   await storageSet({ theme: newTheme });
+}
+
+export function setColorScheme(scheme, options = {}) {
+  const valid = COLOR_SCHEMES.includes(scheme) ? scheme : 'default';
+  document.documentElement.setAttribute('data-color-scheme', valid);
+
+  dom.colorSchemePicker?.querySelectorAll('.color-scheme-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.scheme === valid);
+    btn.setAttribute('aria-checked', btn.dataset.scheme === valid ? 'true' : 'false');
+  });
+
+  refreshThemeTokens();
+  if (options.animate !== false) triggerThemeTransition();
+}
+
+export async function selectColorScheme(scheme) {
+  setColorScheme(scheme);
+  await storageSet({ colorScheme: scheme });
 }
 
 export function initClock() {

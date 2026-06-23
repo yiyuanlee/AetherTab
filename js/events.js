@@ -2,7 +2,7 @@ import { isChromeExtension } from './storage.js';
 import { dom } from './state.js';
 import { createNewCollection, saveSession, loadData } from './collections.js';
 import { initSync, toggleSync } from './sync.js';
-import { toggleTheme } from './widgets.js';
+import { toggleTheme, selectColorScheme } from './widgets.js';
 import { renderActiveTabs, renderCollections } from './render.js';
 import { refreshActiveTabs } from './tabs.js';
 import { setupModalListeners } from './modal.js';
@@ -26,6 +26,10 @@ export function setupEventListeners() {
   dom.newCollectionBtn.addEventListener('click', () => createNewCollection());
   dom.saveSessionBtn.addEventListener('click', saveSession);
   dom.themeToggleBtn.addEventListener('click', toggleTheme);
+  dom.colorSchemePicker?.querySelectorAll('.color-scheme-btn').forEach((btn) => {
+    btn.setAttribute('role', 'radio');
+    btn.addEventListener('click', () => selectColorScheme(btn.dataset.scheme));
+  });
   dom.syncToggleBtn?.addEventListener('click', toggleSync);
 
   setupModalListeners();
