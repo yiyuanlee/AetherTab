@@ -15,6 +15,10 @@ export function closeCustomTabModal() {
   state.activeModalCollectionId = null;
 }
 
+export function isModalOpen() {
+  return !dom.customTabModal?.classList.contains('hidden');
+}
+
 export function handleSaveCustomTab() {
   const title = dom.customTitleInput.value.trim();
   let url = dom.customUrlInput.value.trim();

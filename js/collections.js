@@ -4,6 +4,7 @@ import { persistCollectionsWithSync, restoreFavicons } from './sync.js';
 import { getFaviconUrl } from './utils.js';
 import { state } from './state.js';
 import { showToast } from './toast.js';
+import { pushUndo, executeUndo } from './undo.js';
 import { closeBrowserTab, openTabUrl, refreshActiveTabsNow } from './tabs.js';
 
 export async function loadData() {
@@ -38,10 +39,22 @@ export function createNewCollection(name = 'Untitled Collection') {
 }
 
 export function deleteCollection(id) {
-  const colName = state.collections.find((c) => c.id === id)?.name || 'Collection';
+  const index = state.collections.findIndex((c) => c.id === id);
+  if (index === -1) return;
+
+  const colName = state.collections[index].name;
+  const snapshot = structuredClone(state.collections[index]);
+
   state.collections = state.collections.filter((c) => c.id !== id);
   persistData();
-  showToast(`Deleted "${colName}"`);
+
+  pushUndo(() => {
+    state.collections.splice(index, 0, snapshot);
+    persistData();
+    showToast(`Restored "${colName}"`);
+  });
+
+  showToast(`Deleted "${colName}"`, 'success', { onUndo: executeUndo });
 }
 
 export function renameCollection(id, newName) {
@@ -55,12 +68,23 @@ export function renameCollection(id, newName) {
 
 export function deleteSavedTab(collectionId, index) {
   const col = state.collections.find((c) => c.id === collectionId);
-  if (col) {
-    const tabName = col.tabs[index].title;
-    col.tabs.splice(index, 1);
+  if (!col || !col.tabs[index]) return;
+
+  const tabName = col.tabs[index].title;
+  const snapshot = structuredClone(col.tabs[index]);
+
+  col.tabs.splice(index, 1);
+  persistData();
+
+  pushUndo(() => {
+    const target = state.collections.find((c) => c.id === collectionId);
+    if (!target) return;
+    target.tabs.splice(index, 0, snapshot);
     persistData();
-    showToast(`Removed "${tabName}"`);
-  }
+    showToast(`Restored "${tabName}"`);
+  });
+
+  showToast(`Removed "${tabName}"`, 'success', { onUndo: executeUndo });
 }
 
 export function handleTabDropOnCollection(targetCollectionId) {

@@ -6,6 +6,7 @@ import { toggleTheme, selectColorScheme } from './widgets.js';
 import { renderActiveTabs, renderCollections } from './render.js';
 import { refreshActiveTabs } from './tabs.js';
 import { setupModalListeners } from './modal.js';
+import { setupKeyboardShortcuts } from './shortcuts.js';
 
 export function setupEventListeners() {
   dom.toggleSidebarBtn.addEventListener('click', () => {
@@ -33,6 +34,7 @@ export function setupEventListeners() {
   dom.syncToggleBtn?.addEventListener('click', toggleSync);
 
   setupModalListeners();
+  setupKeyboardShortcuts();
   initSync();
 
   if (isChromeExtension) {

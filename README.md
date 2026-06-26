@@ -48,6 +48,14 @@ AetherTab 是一款极简、高颜值的 Chrome 标签页管理扩展程序。�
   Enable Chrome Sync to keep collections, theme, and weather preferences consistent across all browsers signed into the same Google account. Large datasets are automatically chunked to fit Chrome sync quotas. A status indicator in the sidebar shows sync state in real time.
   开启侧边栏「Sync」按钮后，收藏夹、主题与天气偏好会通过 Chrome 账号同步到所有已登录设备。大数据自动分块存储，状态指示灯实时显示同步进度。
 
+- **Keyboard Shortcuts / 全局快捷键**
+  `/` focus workspace search · `N` new collection · `Esc` close modal or clear search · `Ctrl/Cmd+Z` undo last delete.
+  按 `/` 聚焦全局搜索 · `N` 新建收藏夹 · `Esc` 关闭弹窗或清空搜索 · `Ctrl/Cmd+Z` 撤销删除。
+
+- **Undo Delete / 删除撤销**
+  Deleting a collection or saved tab shows a 5-second undo toast. Only the most recent delete can be undone.
+  删除收藏夹或链接后，底部 toast 提供 5 秒内撤销；仅保留最近一次删除的撤销记录。
+
 ---
 
 ## 🧱 Project Structure | 项目结构
@@ -66,6 +74,8 @@ AetherTab/
 │   ├── sync.js         # Cross-device sync engine & UI state
 │   ├── tabs.js         # Active tab sync (debounced)
 │   ├── toast.js        # Toast notifications
+│   ├── undo.js         # Delete undo stack (5s window)
+│   ├── shortcuts.js    # Global keyboard shortcuts
 │   ├── utils.js        # Helpers (escapeHtml, debounce, favicon)
 │   ├── weather.js      # Weather widget with 30-min cache
 │   └── widgets.js      # Clock & theme
