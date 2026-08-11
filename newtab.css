@@ -1152,6 +1152,45 @@ html[data-theme="light"] .modal-card {
   z-index: 1000;
 }
 
+.onboarding {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(16, 19, 24, .56);
+  backdrop-filter: blur(10px);
+}
+
+.onboarding.hidden { display: none; }
+
+.onboarding-card {
+  width: min(100%, 470px);
+  padding: 34px;
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  background: var(--panel-bg);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .28);
+}
+
+.onboarding-mark { display: flex; gap: 4px; margin-bottom: 30px; }
+.onboarding-mark span { width: 22px; height: 5px; border-radius: 99px; background: var(--accent-muted); }
+.onboarding-mark span:first-child { background: var(--accent-primary); }
+.onboarding-eyebrow { margin: 0 0 10px; color: var(--accent-primary); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.onboarding-card h2 { margin: 0; color: var(--text-primary); font: 600 30px/1.16 var(--font-accent); letter-spacing: -.03em; }
+.onboarding-body { margin: 16px 0 30px; color: var(--text-secondary); font-size: 15px; line-height: 1.65; }
+.onboarding-footer, .onboarding-actions { display: flex; align-items: center; }
+.onboarding-footer { justify-content: space-between; gap: 16px; }
+.onboarding-actions { gap: 14px; color: var(--text-muted); font-size: 12px; font-weight: 600; }
+.onboarding-skip { padding: 8px 0; border: 0; background: transparent; color: var(--text-muted); cursor: pointer; font: 600 13px var(--font-main); }
+.onboarding-skip:hover { color: var(--text-primary); }
+
+@media (max-width: 560px) {
+  .onboarding-card { padding: 26px; }
+  .onboarding-card h2 { font-size: 26px; }
+}
+
 .toast {
   background: rgba(18, 20, 38, 0.9);
   border: 1px solid var(--panel-border);

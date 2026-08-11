@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="newtab.css?v=quiet-mark">
+  <link rel="stylesheet" href="newtab.css?v=onboarding">
 </head>
 <body>
   <div class="app-container">
@@ -181,6 +181,19 @@
 
   <!-- Toast Notification System -->
   <div class="toast-container" id="toast-container"></div>
+
+  <section class="onboarding hidden" id="onboarding" aria-label="Welcome to AetherTab">
+    <div class="onboarding-card" role="dialog" aria-modal="true" aria-labelledby="onboarding-title">
+      <div class="onboarding-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="onboarding-eyebrow" data-onboarding-eyebrow></p>
+      <h2 id="onboarding-title" data-onboarding-title></h2>
+      <p class="onboarding-body" data-onboarding-body></p>
+      <div class="onboarding-footer">
+        <button class="onboarding-skip" type="button" data-onboarding-skip>Skip for now</button>
+        <div class="onboarding-actions"><span data-onboarding-progress></span><button class="btn btn-primary" type="button" data-onboarding-next>Continue</button></div>
+      </div>
+    </div>
+  </section>
 
   <!-- Dialog for Custom Tab Addition -->
   <div class="modal-overlay hidden" id="custom-tab-modal">
