@@ -4,19 +4,19 @@ const STORAGE_KEY = 'onboardingComplete';
 
 const steps = [
   {
-    eyebrow: '01 — Save your flow',
-    title: 'Turn open tabs into a focused workspace.',
-    body: 'Drag a tab into a collection, or save your whole session in one click. AetherTab closes the saved tab so your browser stays clear.',
+    eyebrow: '01 — Clear the noise',
+    title: 'Save what matters. Close the rest.',
+    body: 'Drag a tab into a collection, or save your entire session in one click. Your browser stays calm while your work remains close.',
   },
   {
-    eyebrow: '02 — Make it yours',
-    title: 'Create collections for the work you return to.',
-    body: 'Use collections for projects, reading lists, trips, or anything you want to keep within reach.',
+    eyebrow: '02 — Keep it together',
+    title: 'Give every project a home.',
+    body: 'Create collections for your work, reading, plans, and everything you return to. The right link is always where you expect it.',
   },
   {
-    eyebrow: '03 — Keep it with you',
-    title: 'Enable sync when you are ready.',
-    body: 'Turn on Chrome Sync from the sidebar to keep your collections and preferences consistent across your signed-in browsers.',
+    eyebrow: '03 — Take it with you',
+    title: 'Your workspace, on every device.',
+    body: 'Enable Chrome Sync whenever you are ready to keep your collections and preferences in step across your signed-in browsers.',
   },
 ];
 
