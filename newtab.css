@@ -97,7 +97,7 @@ html[data-theme="light"][data-color-scheme] {
 }
 
 html[data-color-scheme="default"] { --accent-primary: #5b6ee1 !important; --accent-primary-hover: #4657c8 !important; --accent-secondary: #5b6ee1 !important; --accent-tertiary: #5b6ee1 !important; --accent-muted: rgba(91,110,225,.13) !important; --accent-focus-ring: rgba(91,110,225,.24) !important; --card-border-hover: rgba(91,110,225,.42) !important; }
-html[data-color-scheme="argentina"] { --accent-primary: #2784c6 !important; --accent-primary-hover: #176da9 !important; --accent-secondary: #2784c6 !important; --accent-tertiary: #2784c6 !important; --accent-muted: rgba(39,132,198,.13) !important; --accent-focus-ring: rgba(39,132,198,.24) !important; --card-border-hover: rgba(39,132,198,.42) !important; }
+html[data-color-scheme="argentina"] { --accent-primary: #0f8a9d !important; --accent-primary-hover: #087185 !important; --accent-secondary: #0f8a9d !important; --accent-tertiary: #0f8a9d !important; --accent-muted: rgba(15,138,157,.13) !important; --accent-focus-ring: rgba(15,138,157,.24) !important; --card-border-hover: rgba(15,138,157,.42) !important; }
 html[data-color-scheme="portugal"] { --accent-primary: #16865a !important; --accent-primary-hover: #0e6a46 !important; --accent-secondary: #16865a !important; --accent-tertiary: #16865a !important; --accent-muted: rgba(22,134,90,.13) !important; --accent-focus-ring: rgba(22,134,90,.24) !important; --card-border-hover: rgba(22,134,90,.42) !important; }
 html[data-color-scheme="france"] { --accent-primary: #4f6fc7 !important; --accent-primary-hover: #3858ad !important; --accent-secondary: #4f6fc7 !important; --accent-tertiary: #4f6fc7 !important; --accent-muted: rgba(79,111,199,.13) !important; --accent-focus-ring: rgba(79,111,199,.24) !important; --card-border-hover: rgba(79,111,199,.42) !important; }
 html[data-color-scheme="brazil"], html[data-color-scheme="germany"], html[data-color-scheme="england"], html[data-color-scheme="spain"] { --accent-primary: #c36a3a !important; --accent-primary-hover: #a9542a !important; --accent-secondary: #c36a3a !important; --accent-tertiary: #c36a3a !important; --accent-muted: rgba(195,106,58,.13) !important; --accent-focus-ring: rgba(195,106,58,.24) !important; --card-border-hover: rgba(195,106,58,.42) !important; }
@@ -624,13 +624,19 @@ html[data-theme="light"] .expand-sidebar-btn {
 
 .scheme-flag svg { display: none !important; }
 .color-scheme-btn[data-scheme="default"] { --scheme-swatch: #5b6ee1; }
-.color-scheme-btn[data-scheme="argentina"] { --scheme-swatch: #2784c6; }
+.color-scheme-btn[data-scheme="argentina"] { --scheme-swatch: #0f8a9d; }
 .color-scheme-btn[data-scheme="portugal"] { --scheme-swatch: #16865a; }
 .color-scheme-btn[data-scheme="france"] { --scheme-swatch: #4f6fc7; }
 .color-scheme-btn[data-scheme="brazil"],
 .color-scheme-btn[data-scheme="germany"],
 .color-scheme-btn[data-scheme="england"],
 .color-scheme-btn[data-scheme="spain"] { --scheme-swatch: #c36a3a; }
+
+/* Keep the picker intentional: four clearly distinct accent choices. */
+.color-scheme-btn[data-scheme="france"],
+.color-scheme-btn[data-scheme="germany"],
+.color-scheme-btn[data-scheme="england"],
+.color-scheme-btn[data-scheme="spain"] { display: none; }
 
 .scheme-flag {
   display: flex;

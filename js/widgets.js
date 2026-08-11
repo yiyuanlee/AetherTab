@@ -2,7 +2,7 @@ import { storageGet, storageSet } from './storage.js';
 import { dom } from './state.js';
 import { applyColorSchemeTokens } from './themes.js';
 
-export const COLOR_SCHEMES = ['default', 'argentina', 'portugal', 'france', 'brazil', 'germany', 'england', 'spain'];
+export const COLOR_SCHEMES = ['default', 'argentina', 'portugal', 'brazil'];
 
 function getThemeMode() {
   return document.documentElement.getAttribute('data-theme') || 'dark';
