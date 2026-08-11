@@ -1,131 +1,74 @@
-# AetherTab | Premium Tab Manager
+# AetherTab
 
-AetherTab is a lightweight, high-performance Chrome Extension that replaces your default New Tab page with a stunning glassmorphic workspace dashboard. Inspired by Toby, it simplifies your browsing workspace by allowing you to organize, save, and manage your browser tabs into customizable collections.
+[中文文档](README.zh-CN.md)
 
-AetherTab 是一款极简、高颜值的 Chrome 标签页管理扩展程序。它用拟物化磨砂玻璃（Glassmorphic）风格的控制面板取代了浏览器默认的新标签页，让您可以将当前打开的标签拖入不同的收藏夹分类中并自动关闭它们，瞬间还您一个干净清爽的浏览器工作区。
+**A calm, visual workspace for the tabs you want to keep.**
 
----
+AetherTab replaces Chrome's New Tab page with a focused workspace where you can save open tabs, organise links into collections, and return to important work without keeping dozens of tabs open.
 
-## 🚀 Features | 核心特性
+## Highlights
 
-- **Interactive Weather Widget / 实时天气情况卡片**
-  Displays current weather info with a glowing glassmorphic card in the header. Supports browser geolocation detection (GPS) and manual city searches. Includes clickable Celsius/Fahrenheit toggle, local storage caching, and dynamic light colors for weather statuses.
-  顶部中央展示实时天气卡片。支持一键获取浏览器 GPS 定位或手动输入搜索城市。气温支持摄氏/华氏度点击切换，并自动缓存与渲染对应天气色调的虚化背光。
+- Save a tab by dragging it into a collection; the saved tab closes automatically.
+- Save an entire browser session in one action.
+- Create, search, reorder, and group collections by site.
+- Keep collections, preferences, and theme choices in sync across signed-in Chrome browsers.
+- Use local collection search, keyboard shortcuts, undo delete, and a focused weather widget.
+- Choose from four calm accent themes, with light and dark modes.
+- Guide new users through a short, skippable first-run introduction.
 
-- **Larger Premium Link Cards / 大号网页链接卡片**
-  Saved webpages are rendered as larger, beautifully spaced horizontal cards. Featuring larger icons (32x32px container), bold text, and responsive lift-on-hover shadows.
-  保存的网页采用面积更大、间距更合理的大号卡片。配备大尺寸图标容器、加粗标题以及优雅的悬浮抬升阴影。
+## Quick start
 
-- **Auto Domain Badging & HSL Coding / 自动网站标签与色彩编码**
-  Automatically extracts site domain and displays custom capsule badges (e.g. `ChatGPT`, `GitHub`). Badges are dynamically colored with transparent HSL tones based on a stable hash of the domain name.
-  自动识别域名并附带胶囊标签（如 `ChatGPT`、`GitHub`）。基于域名哈希算法自动生成唯一的 HSL 色调着色，使相同域名在视觉上归类一致。
+1. Clone or download this repository.
+2. Open `chrome://extensions` in Chrome.
+3. Enable **Developer mode**.
+4. Select **Load unpacked** and choose this project folder.
+5. Open a new tab.
 
-- **Group by Site (Domain Clustering) / 按网站自动分组**
-  A toggle button in the card header clusters tabs from the same domain into neat, collapsible folders (e.g., `Google Docs (3)`), making dense lists highly manageable.
-  卡片右上角新增“按网站分组”切换。点击后将同站点的标签页自动折叠归类至独立抽屉中，告别长 Session 难寻痛点。
+For a visual-only preview, open `newtab.html` in a browser. Outside extension mode, it loads example data automatically.
 
-- **Collection Card Local Filter / 卡片级局部搜索过滤**
-  Toggle an inline search bar inside any collection card to filter tabs locally in real-time. Features carefully preserved input focus for smooth typing.
-  卡片右上角新增搜索按钮。点击展开卡片微型输入框，实时过滤检索本分类卡片内的链接，快速定位。
+## How it works
 
-- **Glassmorphic Aesthetics / 毛玻璃视觉设计**
-  Deep space background radial gradients, translucent card panels with dynamic border glow shadows, and ultra-smooth micro-interactions.
-  自适应深浅色背景流光渐变、半透明卡片容器与呼吸边缘发光微动效。
-  
-- **Interactive Drag & Drop Tab Cleanup / 拖拽自动整理与清理**
-  Drag open tabs from the sidebar directly into any collection to save and automatically close the browser tab. Drag saved links between collections to organize.
-  可将左侧的当前活动标签拖曳进分类卡片中保存，保存后该标签页会自动从浏览器关闭（强迫症福音）。亦可在收藏夹分类之间自由拖移。
+### Save your flow
 
-- **Dynamic Clock & Custom Greetings / 实时时钟与问候**
-  A beautiful large header displaying localized date, dynamic ticking clock, and natural greetings tailored to the hour.
-  主页面上方显示实时流光电子时钟，并根据不同时段为您展示定制问候语。
+Drag an open tab from the sidebar into any collection, or use **Save Session** to capture every open tab at once.
 
-- **Light & Dark Themes / 深浅双色主题**
-  Toggle instantly between dark/galaxy mode and light/glass mode.
-  支持一键在深邃星空暗色主题与明亮剔透亮色主题之间切换。
+### Keep projects together
 
-- **Cross-Device Sync / 多设备同步**
-  Enable Chrome Sync to keep collections, theme, and weather preferences consistent across all browsers signed into the same Google account. Large datasets are automatically chunked to fit Chrome sync quotas. A status indicator in the sidebar shows sync state in real time.
-  开启侧边栏「Sync」按钮后，收藏夹、主题与天气偏好会通过 Chrome 账号同步到所有已登录设备。大数据自动分块存储，状态指示灯实时显示同步进度。
+Create collections for work, study, trips, reading, or anything else you revisit. Use the per-collection search and site grouping controls to find links quickly.
 
-- **Keyboard Shortcuts / 全局快捷键**
-  `/` focus workspace search · `N` new collection · `Esc` close modal or clear search · `Ctrl/Cmd+Z` undo last delete.
-  按 `/` 聚焦全局搜索 · `N` 新建收藏夹 · `Esc` 关闭弹窗或清空搜索 · `Ctrl/Cmd+Z` 撤销删除。
+### Sync when you need it
 
-- **Undo Delete / 删除撤销**
-  Deleting a collection or saved tab shows a 5-second undo toast. Only the most recent delete can be undone.
-  删除收藏夹或链接后，底部 toast 提供 5 秒内撤销；仅保留最近一次删除的撤销记录。
+Enable Chrome Sync from the sidebar to synchronise collections and preferences between browsers signed in to the same Chrome account.
 
----
-
-## 🧱 Project Structure | 项目结构
-
-```
-AetherTab/
-├── js/
-│   ├── app.js          # Entry point
-│   ├── collections.js  # Data CRUD & session save
-│   ├── constants.js    # Mock data & config constants
-│   ├── events.js       # Event listeners
-│   ├── modal.js        # Custom link modal
-│   ├── render.js       # DOM rendering (single createTabEl)
-│   ├── state.js        # Shared app state & DOM refs
-│   ├── storage.js      # chrome.storage sync/local adapter with chunking
-│   ├── sync.js         # Cross-device sync engine & UI state
-│   ├── tabs.js         # Active tab sync (debounced)
-│   ├── toast.js        # Toast notifications
-│   ├── undo.js         # Delete undo stack (5s window)
-│   ├── shortcuts.js    # Global keyboard shortcuts
-│   ├── utils.js        # Helpers (escapeHtml, debounce, favicon)
-│   ├── weather.js      # Weather widget with 30-min cache
-│   └── widgets.js      # Clock & theme
-├── scripts/build.mjs   # Optional esbuild bundle → dist/
-├── newtab.html
-├── newtab.css
-└── manifest.json
-```
-
-### Development | 开发
+## Development
 
 ```bash
-# Generate extension icons
-npm run icons
-
-# Optional: bundle modules into dist/js/app.js
 npm install
 npm run build
 ```
 
-Load the project folder as an unpacked extension in `chrome://extensions/`. ES modules work directly — no build step required for daily development.
+The extension runs directly from ES modules during normal development, so a build is optional unless you want the bundled output.
 
----
+## Project structure
 
-## 🛠️ Installation | 安装指引
+```text
+js/
+  app.js           Application entry point
+  collections.js   Collection CRUD and session saving
+  onboarding.js    First-run introduction
+  storage.js       Local and Chrome Sync storage adapter
+  sync.js          Cross-device synchronisation
+  tabs.js          Active-tab synchronisation
+  weather.js       Weather widget
+newtab.html        Extension New Tab page
+newtab.css         Interface styles
+manifest.json      Chrome extension manifest
+```
 
-To install AetherTab in Google Chrome:
+## Privacy
 
-1. Clone or download this repository.
-   克隆或下载本仓库代码到本地。
-2. Open **Google Chrome** and navigate to `chrome://extensions/`.
-   打开 Chrome 浏览器并访问 `chrome://extensions/` 管理页面。
-3. Turn on the **"Developer mode"** toggle in the top-right corner.
-   开启页面右上角的 **“开发者模式”**。
-4. Click **"Load unpacked"** in the top-left corner.
-   点击左上角的 **“加载已解压的扩展程序”**。
-5. Select the folder containing these project files.
-   选择包含本项目文件的文件夹。
-6. Open a new browser tab and enjoy!
-   新建一个浏览器标签页，体验 AetherTab！
+Collections and preferences stay in Chrome storage. Cross-device syncing is optional and uses Chrome Sync only after you enable it. Location access is requested only when you choose to use location-aware weather.
 
----
+## License
 
-## 🎨 Local Testing / 免安装预览
-
-No extension context required for previewing! You can double-click `newtab.html` to open it locally in any browser. It will automatically load mock active tabs and collections for you to test the visuals and layouts.
-
-无需加载扩展亦可直接预览设计！您可以在本地直接双击 `newtab.html`，页面会自动识别非扩展运行环境并进入“离线模拟模式”，展现预置的模拟数据和分类卡片以供测试。
-
----
-
-## 📄 License | 许可证
-[MIT License](LICENSE)
+[MIT](LICENSE)
