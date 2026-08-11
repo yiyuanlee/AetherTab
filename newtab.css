@@ -56,16 +56,16 @@
 
 /* Minimal theme system: neutral surfaces + one restrained accent per scheme. */
 html[data-color-scheme] {
-  --bg-gradient: #111315 !important;
+  --bg-gradient: #181b20 !important;
   --bg-gradient-orb1: none !important;
   --bg-gradient-orb2: none !important;
   --bg-gradient-orb3: none !important;
-  --panel-bg: #191c20 !important;
-  --sidebar-bg: #15181b !important;
+  --panel-bg: #22262c !important;
+  --sidebar-bg: #1d2127 !important;
   --panel-border: rgba(255, 255, 255, .09) !important;
   --sidebar-border: rgba(255, 255, 255, .08) !important;
-  --card-bg: #1d2126 !important;
-  --card-bg-hover: #242930 !important;
+  --card-bg: #282d34 !important;
+  --card-bg-hover: #30363e !important;
   --card-border: rgba(255, 255, 255, .07) !important;
   --card-shadow: 0 1px 2px rgba(0, 0, 0, .24) !important;
   --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, .18) !important;
@@ -77,7 +77,7 @@ html[data-color-scheme] {
   --accent-glow-secondary: transparent !important;
   --btn-shadow: none !important;
   --btn-shadow-hover: 0 2px 8px rgba(0, 0, 0, .2) !important;
-  --input-bg: #20242a !important;
+  --input-bg: #2b3038 !important;
   --input-border: rgba(255, 255, 255, .10) !important;
 }
 
@@ -96,11 +96,11 @@ html[data-theme="light"][data-color-scheme] {
   --input-border: rgba(15, 23, 42, .12) !important;
 }
 
-html[data-color-scheme="default"] { --accent-primary: #8b80a4 !important; --accent-primary-hover: #74688d !important; --accent-secondary: #8b80a4 !important; --accent-tertiary: #8b80a4 !important; --accent-muted: rgba(139,128,164,.14) !important; --accent-focus-ring: rgba(139,128,164,.25) !important; --card-border-hover: rgba(139,128,164,.44) !important; }
-html[data-color-scheme="argentina"] { --accent-primary: #7190a6 !important; --accent-primary-hover: #5b778c !important; --accent-secondary: #7190a6 !important; --accent-tertiary: #7190a6 !important; --accent-muted: rgba(113,144,166,.14) !important; --accent-focus-ring: rgba(113,144,166,.25) !important; --card-border-hover: rgba(113,144,166,.44) !important; }
-html[data-color-scheme="portugal"] { --accent-primary: #7e9b8a !important; --accent-primary-hover: #668172 !important; --accent-secondary: #7e9b8a !important; --accent-tertiary: #7e9b8a !important; --accent-muted: rgba(126,155,138,.14) !important; --accent-focus-ring: rgba(126,155,138,.25) !important; --card-border-hover: rgba(126,155,138,.44) !important; }
+html[data-color-scheme="default"] { --accent-primary: #a99cc8 !important; --accent-primary-hover: #8e80ad !important; --accent-secondary: #a99cc8 !important; --accent-tertiary: #a99cc8 !important; --accent-muted: rgba(169,156,200,.15) !important; --accent-focus-ring: rgba(169,156,200,.27) !important; --card-border-hover: rgba(169,156,200,.46) !important; }
+html[data-color-scheme="argentina"] { --accent-primary: #88adc7 !important; --accent-primary-hover: #6f92aa !important; --accent-secondary: #88adc7 !important; --accent-tertiary: #88adc7 !important; --accent-muted: rgba(136,173,199,.15) !important; --accent-focus-ring: rgba(136,173,199,.27) !important; --card-border-hover: rgba(136,173,199,.46) !important; }
+html[data-color-scheme="portugal"] { --accent-primary: #95b69f !important; --accent-primary-hover: #779b83 !important; --accent-secondary: #95b69f !important; --accent-tertiary: #95b69f !important; --accent-muted: rgba(149,182,159,.15) !important; --accent-focus-ring: rgba(149,182,159,.27) !important; --card-border-hover: rgba(149,182,159,.46) !important; }
 html[data-color-scheme="france"] { --accent-primary: #71859e !important; --accent-primary-hover: #5b6d83 !important; --accent-secondary: #71859e !important; --accent-tertiary: #71859e !important; --accent-muted: rgba(113,133,158,.14) !important; --accent-focus-ring: rgba(113,133,158,.25) !important; --card-border-hover: rgba(113,133,158,.44) !important; }
-html[data-color-scheme="brazil"], html[data-color-scheme="germany"], html[data-color-scheme="england"], html[data-color-scheme="spain"] { --accent-primary: #b38a78 !important; --accent-primary-hover: #947060 !important; --accent-secondary: #b38a78 !important; --accent-tertiary: #b38a78 !important; --accent-muted: rgba(179,138,120,.14) !important; --accent-focus-ring: rgba(179,138,120,.25) !important; --card-border-hover: rgba(179,138,120,.44) !important; }
+html[data-color-scheme="brazil"], html[data-color-scheme="germany"], html[data-color-scheme="england"], html[data-color-scheme="spain"] { --accent-primary: #cda08a !important; --accent-primary-hover: #ae816e !important; --accent-secondary: #cda08a !important; --accent-tertiary: #cda08a !important; --accent-muted: rgba(205,160,138,.15) !important; --accent-focus-ring: rgba(205,160,138,.27) !important; --card-border-hover: rgba(205,160,138,.46) !important; }
 
 /* Light Theme overrides */
 html[data-theme="light"] {
@@ -623,14 +623,14 @@ html[data-theme="light"] .expand-sidebar-btn {
 }
 
 .scheme-flag svg { display: none !important; }
-.color-scheme-btn[data-scheme="default"] { --scheme-swatch: #8b80a4; }
-.color-scheme-btn[data-scheme="argentina"] { --scheme-swatch: #7190a6; }
-.color-scheme-btn[data-scheme="portugal"] { --scheme-swatch: #7e9b8a; }
+.color-scheme-btn[data-scheme="default"] { --scheme-swatch: #a99cc8; }
+.color-scheme-btn[data-scheme="argentina"] { --scheme-swatch: #88adc7; }
+.color-scheme-btn[data-scheme="portugal"] { --scheme-swatch: #95b69f; }
 .color-scheme-btn[data-scheme="france"] { --scheme-swatch: #4f6fc7; }
 .color-scheme-btn[data-scheme="brazil"],
 .color-scheme-btn[data-scheme="germany"],
 .color-scheme-btn[data-scheme="england"],
-.color-scheme-btn[data-scheme="spain"] { --scheme-swatch: #b38a78; }
+.color-scheme-btn[data-scheme="spain"] { --scheme-swatch: #cda08a; }
 
 /* Keep the picker intentional: four clearly distinct accent choices. */
 .color-scheme-btn[data-scheme="france"],
