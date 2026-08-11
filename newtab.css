@@ -277,8 +277,8 @@ html[data-theme="light"] ::-webkit-scrollbar-thumb {
 }
 
 .logo-icon {
-  color: var(--accent-primary);
-  filter: none;
+  display: block;
+  border-radius: 6px;
 }
 
 .logo-text {
