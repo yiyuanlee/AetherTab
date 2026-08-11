@@ -611,6 +611,27 @@ html[data-theme="light"] .expand-sidebar-btn {
   box-shadow: 0 0 0 2px var(--accent-primary), 0 0 14px var(--accent-glow), 0 0 8px var(--accent-glow-secondary);
 }
 
+/* Accent choices are colour tokens, not flags. */
+.scheme-flag {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--scheme-swatch, #5b6ee1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
+}
+
+.scheme-flag svg { display: none; }
+.color-scheme-btn[data-scheme="default"] { --scheme-swatch: #5b6ee1; }
+.color-scheme-btn[data-scheme="argentina"] { --scheme-swatch: #2784c6; }
+.color-scheme-btn[data-scheme="portugal"] { --scheme-swatch: #16865a; }
+.color-scheme-btn[data-scheme="france"] { --scheme-swatch: #4f6fc7; }
+.color-scheme-btn[data-scheme="brazil"],
+.color-scheme-btn[data-scheme="germany"],
+.color-scheme-btn[data-scheme="england"],
+.color-scheme-btn[data-scheme="spain"] { --scheme-swatch: #c36a3a; }
+
 .scheme-flag {
   display: flex;
   align-items: center;
