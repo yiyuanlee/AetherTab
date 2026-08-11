@@ -54,6 +54,54 @@
   --success: #10b981;
 }
 
+/* Minimal theme system: neutral surfaces + one restrained accent per scheme. */
+html[data-color-scheme] {
+  --bg-gradient: #181b20 !important;
+  --bg-gradient-orb1: none !important;
+  --bg-gradient-orb2: none !important;
+  --bg-gradient-orb3: none !important;
+  --panel-bg: #22262c !important;
+  --sidebar-bg: #1d2127 !important;
+  --panel-border: rgba(255, 255, 255, .09) !important;
+  --sidebar-border: rgba(255, 255, 255, .08) !important;
+  --card-bg: #282d34 !important;
+  --card-bg-hover: #30363e !important;
+  --card-border: rgba(255, 255, 255, .07) !important;
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, .24) !important;
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, .18) !important;
+  --accent-gradient: var(--accent-primary) !important;
+  --accent-gradient-v: var(--accent-primary) !important;
+  --accent-gradient-h: var(--accent-primary) !important;
+  --text-accent-gradient: var(--text-primary) !important;
+  --accent-glow: transparent !important;
+  --accent-glow-secondary: transparent !important;
+  --btn-shadow: none !important;
+  --btn-shadow-hover: 0 2px 8px rgba(0, 0, 0, .2) !important;
+  --input-bg: #2b3038 !important;
+  --input-border: rgba(255, 255, 255, .10) !important;
+}
+
+html[data-theme="light"][data-color-scheme] {
+  --bg-gradient: #f7f7f5 !important;
+  --panel-bg: #ffffff !important;
+  --sidebar-bg: #fbfbfa !important;
+  --panel-border: rgba(15, 23, 42, .10) !important;
+  --sidebar-border: rgba(15, 23, 42, .08) !important;
+  --card-bg: #ffffff !important;
+  --card-bg-hover: #f3f5f7 !important;
+  --card-border: rgba(15, 23, 42, .09) !important;
+  --card-shadow: 0 1px 2px rgba(15, 23, 42, .05) !important;
+  --card-shadow-hover: 0 8px 24px rgba(15, 23, 42, .08) !important;
+  --input-bg: #f5f6f7 !important;
+  --input-border: rgba(15, 23, 42, .12) !important;
+}
+
+html[data-color-scheme="default"] { --accent-primary: #a99cc8 !important; --accent-primary-hover: #8e80ad !important; --accent-secondary: #a99cc8 !important; --accent-tertiary: #a99cc8 !important; --accent-muted: rgba(169,156,200,.15) !important; --accent-focus-ring: rgba(169,156,200,.27) !important; --card-border-hover: rgba(169,156,200,.46) !important; }
+html[data-color-scheme="argentina"] { --accent-primary: #88adc7 !important; --accent-primary-hover: #6f92aa !important; --accent-secondary: #88adc7 !important; --accent-tertiary: #88adc7 !important; --accent-muted: rgba(136,173,199,.15) !important; --accent-focus-ring: rgba(136,173,199,.27) !important; --card-border-hover: rgba(136,173,199,.46) !important; }
+html[data-color-scheme="portugal"] { --accent-primary: #95b69f !important; --accent-primary-hover: #779b83 !important; --accent-secondary: #95b69f !important; --accent-tertiary: #95b69f !important; --accent-muted: rgba(149,182,159,.15) !important; --accent-focus-ring: rgba(149,182,159,.27) !important; --card-border-hover: rgba(149,182,159,.46) !important; }
+html[data-color-scheme="france"] { --accent-primary: #71859e !important; --accent-primary-hover: #5b6d83 !important; --accent-secondary: #71859e !important; --accent-tertiary: #71859e !important; --accent-muted: rgba(113,133,158,.14) !important; --accent-focus-ring: rgba(113,133,158,.25) !important; --card-border-hover: rgba(113,133,158,.44) !important; }
+html[data-color-scheme="brazil"], html[data-color-scheme="germany"], html[data-color-scheme="england"], html[data-color-scheme="spain"] { --accent-primary: #cda08a !important; --accent-primary-hover: #ae816e !important; --accent-secondary: #cda08a !important; --accent-tertiary: #cda08a !important; --accent-muted: rgba(205,160,138,.15) !important; --accent-focus-ring: rgba(205,160,138,.27) !important; --card-border-hover: rgba(205,160,138,.46) !important; }
+
 /* Light Theme overrides */
 html[data-theme="light"] {
   --bg-gradient: radial-gradient(circle at 50% 50%, #f4f6fc 0%, #e9edf7 100%);
@@ -229,7 +277,8 @@ html[data-theme="light"] ::-webkit-scrollbar-thumb {
 }
 
 .logo-icon {
-  filter: drop-shadow(0 2px 8px var(--accent-glow));
+  display: block;
+  border-radius: 6px;
 }
 
 .logo-text {
@@ -562,6 +611,33 @@ html[data-theme="light"] .expand-sidebar-btn {
   background: var(--card-bg-hover);
   box-shadow: 0 0 0 2px var(--accent-primary), 0 0 14px var(--accent-glow), 0 0 8px var(--accent-glow-secondary);
 }
+
+/* Accent choices are colour tokens, not flags. */
+.scheme-flag {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--scheme-swatch, #5b6ee1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
+}
+
+.scheme-flag svg { display: none !important; }
+.color-scheme-btn[data-scheme="default"] { --scheme-swatch: #a99cc8; }
+.color-scheme-btn[data-scheme="argentina"] { --scheme-swatch: #88adc7; }
+.color-scheme-btn[data-scheme="portugal"] { --scheme-swatch: #95b69f; }
+.color-scheme-btn[data-scheme="france"] { --scheme-swatch: #4f6fc7; }
+.color-scheme-btn[data-scheme="brazil"],
+.color-scheme-btn[data-scheme="germany"],
+.color-scheme-btn[data-scheme="england"],
+.color-scheme-btn[data-scheme="spain"] { --scheme-swatch: #cda08a; }
+
+/* Keep the picker intentional: four clearly distinct accent choices. */
+.color-scheme-btn[data-scheme="france"],
+.color-scheme-btn[data-scheme="germany"],
+.color-scheme-btn[data-scheme="england"],
+.color-scheme-btn[data-scheme="spain"] { display: none; }
 
 .scheme-flag {
   display: flex;
@@ -1074,6 +1150,45 @@ html[data-theme="light"] .modal-card {
   flex-direction: column;
   gap: 8px;
   z-index: 1000;
+}
+
+.onboarding {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(16, 19, 24, .56);
+  backdrop-filter: blur(10px);
+}
+
+.onboarding.hidden { display: none; }
+
+.onboarding-card {
+  width: min(100%, 470px);
+  padding: 34px;
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  background: var(--panel-bg);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .28);
+}
+
+.onboarding-mark { display: flex; gap: 4px; margin-bottom: 30px; }
+.onboarding-mark span { width: 22px; height: 5px; border-radius: 99px; background: var(--accent-muted); }
+.onboarding-mark span:first-child { background: var(--accent-primary); }
+.onboarding-eyebrow { margin: 0 0 10px; color: var(--accent-primary); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.onboarding-card h2 { margin: 0; color: var(--text-primary); font: 600 30px/1.16 var(--font-accent); letter-spacing: -.03em; }
+.onboarding-body { margin: 16px 0 30px; color: var(--text-secondary); font-size: 15px; line-height: 1.65; }
+.onboarding-footer, .onboarding-actions { display: flex; align-items: center; }
+.onboarding-footer { justify-content: space-between; gap: 16px; }
+.onboarding-actions { gap: 14px; color: var(--text-muted); font-size: 12px; font-weight: 600; }
+.onboarding-skip { padding: 8px 0; border: 0; background: transparent; color: var(--text-muted); cursor: pointer; font: 600 13px var(--font-main); }
+.onboarding-skip:hover { color: var(--text-primary); }
+
+@media (max-width: 560px) {
+  .onboarding-card { padding: 26px; }
+  .onboarding-card h2 { font-size: 26px; }
 }
 
 .toast {
