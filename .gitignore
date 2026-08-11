@@ -15,3 +15,6 @@ node_modules/
 
 # Build output (optional bundle)
 dist/
+
+# Generated visual smoke-test artifacts
+scripts/test-preview*.png

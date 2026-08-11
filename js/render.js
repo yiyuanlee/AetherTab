@@ -5,7 +5,6 @@ import {
   cleanUrl,
   getFaviconUrl,
   getDomainBadgeName,
-  getDomainColor,
   bindFaviconFallback,
 } from './utils.js';
 import {
@@ -20,6 +19,7 @@ import {
 } from './collections.js';
 import { activateBrowserTab, closeBrowserTab, openTabUrl } from './tabs.js';
 import { openCustomTabModal } from './modal.js';
+import { openShareCollectionModal } from './bookmark-manager.js';
 
 function filterTabsInCard(col, localQuery) {
   return col.tabs.filter((tab) => {
@@ -95,7 +95,6 @@ function createSavedTabEl(tab, col, index) {
   const faviconUrl = getFaviconUrl(tab.url);
   const domain = cleanUrl(tab.url).split('/')[0];
   const badgeName = getDomainBadgeName(tab.url, domain);
-  const badgeColor = getDomainColor(domain);
 
   tabEl.innerHTML = `
     <div class="tab-favicon">
@@ -104,7 +103,7 @@ function createSavedTabEl(tab, col, index) {
     <div class="tab-info">
       <div class="tab-title" title="${escapeHtml(tab.title)}">${escapeHtml(tab.title)}</div>
       <div class="tab-meta-row">
-        <span class="domain-badge" style="background: ${badgeColor.bg}; color: ${badgeColor.color}; border: 1px solid ${badgeColor.border}">${escapeHtml(badgeName)}</span>
+        <span class="domain-badge">${escapeHtml(badgeName)}</span>
         <div class="tab-url" title="${escapeHtml(tab.url)}">${escapeHtml(cleanUrl(tab.url))}</div>
       </div>
     </div>
@@ -277,6 +276,9 @@ function buildCollectionCard(col) {
         <button class="collection-action-btn open-all-tabs-btn" title="Open all tabs">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
         </button>
+        <button class="collection-action-btn share-collection-btn" title="Share collection">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"></line><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line></svg>
+        </button>
         <button class="collection-action-btn delete-collection-btn" title="Delete collection">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
         </button>
@@ -325,6 +327,7 @@ function buildCollectionCard(col) {
 
   card.querySelector('.add-custom-link-btn').addEventListener('click', () => openCustomTabModal(col.id));
   card.querySelector('.open-all-tabs-btn').addEventListener('click', () => openAllTabsInCollection(col.id));
+  card.querySelector('.share-collection-btn').addEventListener('click', () => openShareCollectionModal(col.id));
   card.querySelector('.delete-collection-btn').addEventListener('click', () => {
     if (confirm(`Are you sure you want to delete the collection "${col.name}"?`)) {
       deleteCollection(col.id);

@@ -10,10 +10,13 @@ AetherTab replaces Chrome's New Tab page with a focused workspace where you can 
 
 - Save a tab by dragging it into a collection; the saved tab closes automatically.
 - Save an entire browser session in one action.
+- Import bookmarks directly from Chrome or from Netscape HTML, Toby JSON/TXT, generic JSON, and AetherTab share files.
+- Smart-organise links locally by site, title, keywords, and source-folder context, with duplicate removal and a confirmation preview.
+- Share any collection as a portable code, direct import link, JSON file, or system share-sheet item.
 - Create, search, reorder, and group collections by site.
 - Keep collections, preferences, and theme choices in sync across signed-in Chrome browsers.
 - Use local collection search, keyboard shortcuts, undo delete, and a focused weather widget.
-- Choose from four calm accent themes, with light and dark modes.
+- Choose from four cohesive page-wide color themes, each with light and dark modes.
 - Guide new users through a short, skippable first-run introduction.
 
 ## Quick start
@@ -36,6 +39,16 @@ Drag an open tab from the sidebar into any collection, or use **Save Session** t
 
 Create collections for work, study, trips, reading, or anything else you revisit. Use the per-collection search and site grouping controls to find links quickly.
 
+### Import and smart-organise bookmarks
+
+Select **Import** to read Chrome bookmarks directly, choose a browser/Toby HTML, JSON, or TXT export, or paste an AetherTab share code. Toby's legacy `lists → cards` and newer `spaces → collections → resources` layouts are recognized, with Space and collection context preserved. Pick **By category**, **Keep folders**, or **One collection**, then review the local preview before saving. Duplicate, tracking-only, invalid, and unsafe URLs are skipped automatically. Toby notes and tags remain out of scope because AetherTab collections currently store web links only.
+
+Use **Organize** at any time to regroup the current workspace. Applying the preview can be undone for five seconds.
+
+### Share a collection
+
+Use the share icon on a collection card. A share code works across AetherTab installations, the JSON file is a portable backup, and the direct link offers one-click import where the receiving installation can open it. Sharing includes only collection name, link titles, and HTTP(S) URLs.
+
 ### Sync when you need it
 
 Enable Chrome Sync from the sidebar to synchronise collections and preferences between browsers signed in to the same Chrome account.
@@ -44,7 +57,9 @@ Enable Chrome Sync from the sidebar to synchronise collections and preferences b
 
 ```bash
 npm install
+npm test
 npm run build
+npm run test:preview
 ```
 
 The extension runs directly from ES modules during normal development, so a build is optional unless you want the bundled output.
@@ -54,6 +69,8 @@ The extension runs directly from ES modules during normal development, so a buil
 ```text
 js/
   app.js           Application entry point
+  bookmark-manager.js Import, organize, and sharing UI workflows
+  bookmark-tools.js   Bookmark parsing, classification, deduplication, and share format
   collections.js   Collection CRUD and session saving
   onboarding.js    First-run introduction
   storage.js       Local and Chrome Sync storage adapter
@@ -67,7 +84,7 @@ manifest.json      Chrome extension manifest
 
 ## Privacy
 
-Collections and preferences stay in Chrome storage. Cross-device syncing is optional and uses Chrome Sync only after you enable it. Location access is requested only when you choose to use location-aware weather.
+Collections and preferences stay in Chrome storage. Bookmark parsing, deduplication, and smart classification run entirely on the current device. A collection leaves the device only when you explicitly copy, download, or share it. Cross-device syncing is optional and uses Chrome Sync only after you enable it. Location access is requested only when you choose to use location-aware weather.
 
 ## License
 

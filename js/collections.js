@@ -211,3 +211,56 @@ export function addCustomTabToCollection(collectionId, title, url) {
   showToast(`Added custom link to ${targetCol.name}`);
   return true;
 }
+
+export function addImportedCollections(importedCollections) {
+  if (!Array.isArray(importedCollections) || importedCollections.length === 0) return 0;
+
+  const snapshot = structuredClone(state.collections);
+  let importedCount = 0;
+
+  importedCollections.forEach((collection) => {
+    if (!collection?.tabs?.length) return;
+
+    const existing = state.collections.find(
+      (candidate) => candidate.name.trim().toLowerCase() === collection.name.trim().toLowerCase(),
+    );
+
+    if (existing) {
+      existing.tabs.push(...collection.tabs);
+    } else {
+      state.collections.push(collection);
+    }
+    importedCount += collection.tabs.length;
+  });
+
+  if (importedCount === 0) return 0;
+
+  persistData();
+  pushUndo(() => {
+    state.collections = snapshot;
+    persistData();
+    showToast('Reverted bookmark import');
+  });
+  showToast(`Imported ${importedCount} bookmarks`, 'success', { onUndo: executeUndo });
+  return importedCount;
+}
+
+export function replaceAllCollections(nextCollections) {
+  if (!Array.isArray(nextCollections) || nextCollections.length === 0) return false;
+
+  const snapshot = structuredClone(state.collections);
+  state.collections = nextCollections;
+  persistData();
+
+  pushUndo(() => {
+    state.collections = snapshot;
+    persistData();
+    showToast('Restored your previous organization');
+  });
+
+  const linkCount = nextCollections.reduce((total, collection) => total + collection.tabs.length, 0);
+  showToast(`Organized ${linkCount} links into ${nextCollections.length} collections`, 'success', {
+    onUndo: executeUndo,
+  });
+  return true;
+}

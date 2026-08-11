@@ -3,6 +3,7 @@ import { createNewCollection } from './collections.js';
 import { closeCustomTabModal, isModalOpen } from './modal.js';
 import { renderActiveTabs, renderCollections } from './render.js';
 import { executeUndo } from './undo.js';
+import { closeOpenBookmarkModal, isBookmarkToolsModalOpen } from './bookmark-manager.js';
 
 function isEditableTarget(target) {
   if (!target || !(target instanceof Element)) return false;
@@ -40,6 +41,12 @@ export function setupKeyboardShortcuts() {
     }
 
     if (e.key === 'Escape') {
+      if (isBookmarkToolsModalOpen()) {
+        e.preventDefault();
+        closeOpenBookmarkModal();
+        return;
+      }
+
       if (isModalOpen()) {
         e.preventDefault();
         closeCustomTabModal();

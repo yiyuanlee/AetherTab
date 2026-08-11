@@ -1,8 +1,13 @@
 import { storageGet, storageSet } from './storage.js';
 import { dom } from './state.js';
-import { applyColorSchemeTokens } from './themes.js';
+import { applyColorSchemeTokens } from './themes.js?v=1.5.3';
 
-export const COLOR_SCHEMES = ['default', 'argentina', 'portugal', 'brazil'];
+export const COLOR_SCHEMES = [
+  'default',
+  'sage',
+  'lilac',
+  'sand',
+];
 
 function getThemeMode() {
   return document.documentElement.getAttribute('data-theme') || 'dark';
@@ -26,7 +31,7 @@ function triggerThemeTransition() {
 
 export async function initTheme() {
   const result = await storageGet(['theme', 'colorScheme']);
-  const theme = result.theme || 'dark';
+  const theme = result.theme || 'light';
   const scheme = COLOR_SCHEMES.includes(result.colorScheme) ? result.colorScheme : 'default';
 
   document.documentElement.setAttribute('data-theme', theme);
