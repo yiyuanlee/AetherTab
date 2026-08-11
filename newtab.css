@@ -277,7 +277,8 @@ html[data-theme="light"] ::-webkit-scrollbar-thumb {
 }
 
 .logo-icon {
-  filter: drop-shadow(0 2px 8px var(--accent-glow));
+  color: var(--accent-primary);
+  filter: none;
 }
 
 .logo-text {
