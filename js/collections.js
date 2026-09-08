@@ -118,6 +118,55 @@ export function handleTabDropOnCollection(targetCollectionId) {
   state.draggedElementData = null;
 }
 
+export function handleTabDropAtPosition(targetCollectionId, targetIndex, placement = 'before') {
+  const drag = state.draggedElementData;
+  const targetCol = state.collections.find((collection) => collection.id === targetCollectionId);
+  if (!drag || !targetCol || !['active', 'saved'].includes(drag.type)) return false;
+
+  const numericTargetIndex = Number(targetIndex);
+  if (!Number.isInteger(numericTargetIndex)) return false;
+  const clampedTargetIndex = Math.max(0, Math.min(numericTargetIndex, targetCol.tabs.length));
+  let insertionIndex = clampedTargetIndex + (placement === 'after' ? 1 : 0);
+  let movedTab;
+  let message;
+
+  if (drag.type === 'active') {
+    movedTab = {
+      title: drag.title,
+      url: drag.url,
+      favicon: getFaviconUrl(drag.url),
+    };
+    insertionIndex = Math.min(insertionIndex, targetCol.tabs.length);
+    targetCol.tabs.splice(insertionIndex, 0, movedTab);
+    closeBrowserTab(drag.tabId);
+    message = `Saved "${movedTab.title}" to ${targetCol.name}`;
+  } else {
+    const sourceCol = state.collections.find((collection) => collection.id === drag.collectionId);
+    if (!sourceCol || !sourceCol.tabs[drag.index]) {
+      state.draggedElementData = null;
+      return false;
+    }
+
+    if (sourceCol.id === targetCol.id && drag.index < insertionIndex) insertionIndex -= 1;
+    if (sourceCol.id === targetCol.id && drag.index === insertionIndex) {
+      state.draggedElementData = null;
+      return false;
+    }
+
+    [movedTab] = sourceCol.tabs.splice(drag.index, 1);
+    insertionIndex = Math.max(0, Math.min(insertionIndex, targetCol.tabs.length));
+    targetCol.tabs.splice(insertionIndex, 0, movedTab);
+    message = sourceCol.id === targetCol.id
+      ? `Reordered "${movedTab.title}"`
+      : `Moved "${movedTab.title}" to ${targetCol.name}`;
+  }
+
+  state.draggedElementData = null;
+  persistData();
+  showToast(message);
+  return true;
+}
+
 export function handleCollectionDropOnCollection(sourceId, targetId) {
   if (sourceId === targetId) return;
 

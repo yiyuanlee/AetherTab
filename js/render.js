@@ -13,6 +13,7 @@ import {
   deleteCollection,
   deleteSavedTab,
   handleTabDropOnCollection,
+  handleTabDropAtPosition,
   handleCollectionDropOnCollection,
   quickSaveTab,
   openAllTabsInCollection,
@@ -91,6 +92,7 @@ function createSavedTabEl(tab, col, index) {
   tabEl.draggable = true;
   tabEl.dataset.index = index;
   tabEl.dataset.collectionId = col.id;
+  tabEl.setAttribute('aria-label', `${tab.title}. Drag to reorder within this collection.`);
 
   const faviconUrl = getFaviconUrl(tab.url);
   const domain = cleanUrl(tab.url).split('/')[0];
@@ -129,7 +131,51 @@ function createSavedTabEl(tab, col, index) {
     e.dataTransfer.setData('text/plain', tab.url);
   });
 
-  tabEl.addEventListener('dragend', () => tabEl.classList.remove('dragging'));
+  const clearDropPosition = () => {
+    tabEl.classList.remove('tab-drop-before', 'tab-drop-after');
+  };
+
+  tabEl.addEventListener('dragover', (e) => {
+    const drag = state.draggedElementData;
+    if (!drag || !['active', 'saved'].includes(drag.type)) return;
+    if (drag.type === 'saved' && drag.collectionId === col.id && drag.index === index) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'move';
+    const placement = e.clientY < tabEl.getBoundingClientRect().top + tabEl.offsetHeight / 2
+      ? 'before'
+      : 'after';
+    tabEl.classList.toggle('tab-drop-before', placement === 'before');
+    tabEl.classList.toggle('tab-drop-after', placement === 'after');
+  });
+
+  tabEl.addEventListener('dragleave', (e) => {
+    if (!tabEl.contains(e.relatedTarget)) clearDropPosition();
+  });
+
+  tabEl.addEventListener('drop', (e) => {
+    const drag = state.draggedElementData;
+    if (!drag || !['active', 'saved'].includes(drag.type)) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    const placement = tabEl.classList.contains('tab-drop-after') ? 'after' : 'before';
+    clearDropPosition();
+    handleTabDropAtPosition(col.id, index, placement);
+  });
+
+  tabEl.addEventListener('dragend', () => {
+    tabEl.classList.remove('dragging');
+    document.querySelectorAll('.tab-drop-before, .tab-drop-after').forEach((item) => {
+      item.classList.remove('tab-drop-before', 'tab-drop-after');
+    });
+    if (state.draggedElementData?.type === 'saved'
+      && state.draggedElementData.collectionId === col.id
+      && state.draggedElementData.index === index) {
+      state.draggedElementData = null;
+    }
+  });
   tabEl.addEventListener('click', (e) => {
     if (e.target.closest('.delete-saved-tab')) return;
     openTabUrl(tab.url);
@@ -144,11 +190,12 @@ function createSavedTabEl(tab, col, index) {
 
 function renderTabsIntoContainer(col, tabsListContainer, activeTabsInCard) {
   tabsListContainer.innerHTML = '';
+  const sourceCollection = state.collections.find((collection) => collection.id === col.id) || col;
 
   if (col.isGrouped && activeTabsInCard.length > 0) {
     const groups = {};
     activeTabsInCard.forEach((tab) => {
-      const originalIndex = col.tabs.findIndex((t) => t === tab);
+      const originalIndex = sourceCollection.tabs.findIndex((candidate) => candidate === tab);
       const domain = cleanUrl(tab.url).split('/')[0];
       if (!groups[domain]) groups[domain] = [];
       groups[domain].push({ tab, originalIndex });
@@ -200,7 +247,7 @@ function renderTabsIntoContainer(col, tabsListContainer, activeTabsInCard) {
   }
 
   activeTabsInCard.forEach((tab) => {
-    const originalIndex = col.tabs.findIndex((t) => t === tab);
+    const originalIndex = sourceCollection.tabs.findIndex((candidate) => candidate === tab);
     tabsListContainer.appendChild(createSavedTabEl(tab, col, originalIndex));
   });
 }

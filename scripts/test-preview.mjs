@@ -97,6 +97,30 @@ try {
   );
   await page.locator('.color-scheme-btn[data-scheme="default"]').click();
 
+  const firstCollectionTabs = page.locator('.collection-card').first().locator('.collection-tabs-list > .tab-item');
+  assert.equal(await firstCollectionTabs.count(), 2);
+  const firstSavedTabTitle = (await firstCollectionTabs.nth(0).locator('.tab-title').textContent())?.trim();
+  const secondSavedTabTitle = (await firstCollectionTabs.nth(1).locator('.tab-title').textContent())?.trim();
+  const secondSavedTabBox = await firstCollectionTabs.nth(1).boundingBox();
+  assert.ok(secondSavedTabBox);
+  await firstCollectionTabs.nth(0).dragTo(firstCollectionTabs.nth(1), {
+    targetPosition: { x: 20, y: secondSavedTabBox.height - 2 },
+  });
+  await page.waitForFunction((expectedTitle) => (
+    document.querySelector('.collection-card .collection-tabs-list > .tab-item .tab-title')?.textContent?.trim()
+      === expectedTitle
+  ), secondSavedTabTitle);
+  assert.equal(
+    (await firstCollectionTabs.nth(1).locator('.tab-title').textContent())?.trim(),
+    firstSavedTabTitle,
+  );
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await page.locator('.collection-card').first().waitFor();
+  assert.equal(
+    (await page.locator('.collection-card').first().locator('.tab-title').first().textContent())?.trim(),
+    secondSavedTabTitle,
+  );
+
   await page.locator('#import-bookmarks-btn').click();
   await page.locator('#bookmark-file-input').setInputFiles({
     name: 'toby-export.json',
@@ -181,6 +205,7 @@ try {
   console.log('Initial collections:', initialCollections);
   console.log('Collections after import:', importedCollections);
   console.log('Four page-wide color themes and persistence: OK');
+  console.log('Saved tab drag sorting and persistence: OK');
   console.log('Import, smart organize, and share dialogs: OK');
   console.log('Screenshot saved to scripts/test-preview.png');
 } finally {

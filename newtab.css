@@ -2413,7 +2413,7 @@ html[data-theme="light"] .collection-drag-handle:hover {
 html[data-color-scheme] {
   --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   --font-accent: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-  --sidebar-width: 286px;
+  --sidebar-width: 312px;
   --accent-primary: #0071e3 !important;
   --accent-primary-hover: #0077ed !important;
   --accent-secondary: #0071e3 !important;
@@ -2591,14 +2591,14 @@ body::after,
   color: var(--text-muted);
 }
 
-.section-title-bar { padding: 6px 20px 9px; }
+.section-title-bar { padding: 8px 20px 11px; }
 
 .section-title {
   background: none;
   color: var(--text-muted);
   -webkit-background-clip: border-box;
   -webkit-text-fill-color: currentColor;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
   letter-spacing: .08em;
 }
@@ -2611,13 +2611,15 @@ body::after,
 
 .action-link-btn:hover { text-decoration: none; opacity: .72; }
 
-.active-tabs-list { padding: 0 10px 12px; }
+.active-tabs-list { padding: 0 12px 14px; }
 
 .active-tabs-list .tab-item {
-  margin-bottom: 2px;
-  padding: 9px 10px;
+  min-height: 54px;
+  margin-bottom: 4px;
+  padding: 11px 12px;
+  gap: 12px;
   border: 0;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .active-tabs-list .tab-item:hover {
@@ -2625,8 +2627,19 @@ body::after,
   background: var(--surface-hover);
 }
 
-.tab-title { font-size: 12px; font-weight: 550; }
-.tab-url { color: var(--text-muted); font-size: 10px; }
+.active-tabs-list .tab-favicon {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+}
+
+.active-tabs-list .tab-favicon img {
+  width: 18px;
+  height: 18px;
+}
+
+.tab-title { font-size: 14px; font-weight: 550; line-height: 1.35; }
+.tab-url { color: var(--text-muted); font-size: 11px; line-height: 1.35; }
 
 .sidebar-footer {
   padding: 14px 18px 18px;
@@ -2799,7 +2812,7 @@ html[data-theme="light"] .btn-secondary:hover {
 
 .collection-card {
   min-height: 120px;
-  padding: 18px;
+  padding: 20px;
   border: 1px solid var(--card-border);
   border-radius: 20px;
   background: var(--surface);
@@ -2814,7 +2827,7 @@ html[data-theme="light"] .btn-secondary:hover {
 }
 
 .collection-header-row {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   padding-left: 0;
 }
 
@@ -2833,8 +2846,8 @@ html[data-theme="light"] .btn-secondary:hover {
 }
 
 .collection-title-input {
-  padding: 3px 5px;
-  font-size: 16px;
+  padding: 4px 6px;
+  font-size: 18px;
   font-weight: 650;
   letter-spacing: -.025em;
 }
@@ -2856,8 +2869,8 @@ html[data-theme="light"] .collection-badge {
 .collection-actions { gap: 1px; }
 
 .collection-action-btn {
-  width: 29px;
-  height: 29px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   color: var(--text-muted);
 }
@@ -2868,15 +2881,16 @@ html[data-theme="light"] .collection-action-btn:hover {
   color: var(--text-primary);
 }
 
-.collection-tabs-list { gap: 7px; }
+.collection-tabs-list { gap: 9px; }
 
 .collection-tabs-list .tab-item,
 html[data-theme="light"] .collection-tabs-list .tab-item {
   margin: 0;
-  padding: 11px 12px;
-  gap: 11px;
+  min-height: 64px;
+  padding: 13px 14px;
+  gap: 13px;
   border: 1px solid transparent;
-  border-radius: 13px;
+  border-radius: 15px;
   background: var(--surface-soft);
   box-shadow: none;
 }
@@ -2888,18 +2902,35 @@ html[data-theme="light"] .collection-tabs-list .tab-item {
   box-shadow: none;
 }
 
+.collection-tabs-list .tab-item.tab-drop-before::before,
+.collection-tabs-list .tab-item.tab-drop-after::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-focus-ring);
+  pointer-events: none;
+}
+
+.collection-tabs-list .tab-item.tab-drop-before::before { top: -6px; }
+.collection-tabs-list .tab-item.tab-drop-after::after { bottom: -6px; }
+
 .collection-tabs-list .tab-favicon,
 html[data-theme="light"] .collection-tabs-list .tab-favicon {
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border: 1px solid var(--separator);
-  border-radius: 9px;
+  border-radius: 10px;
   background: var(--surface);
 }
 
-.collection-tabs-list .tab-favicon img { width: 17px; height: 17px; }
-.collection-tabs-list .tab-title { font-size: 12px; font-weight: 600; letter-spacing: -.01em; }
-.collection-tabs-list .tab-url { font-size: 9px; }
+.collection-tabs-list .tab-favicon img { width: 21px; height: 21px; }
+.collection-tabs-list .tab-title { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
+.collection-tabs-list .tab-url { font-size: 11px; }
 
 .domain-badge {
   padding: 2px 6px;
@@ -2907,7 +2938,7 @@ html[data-theme="light"] .collection-tabs-list .tab-favicon {
   border-radius: 99px;
   background: var(--surface);
   color: var(--text-secondary);
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: .02em;
   text-transform: none;
