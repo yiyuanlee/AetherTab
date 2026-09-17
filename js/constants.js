@@ -1,7 +1,7 @@
 export const MOCK_COLLECTIONS = [
   {
     id: 'col-1',
-    name: '🚀 Getting Started',
+    name: 'Getting Started',
     tabs: [
       { title: 'Welcome to AetherTab', url: 'https://github.com', favicon: '' },
       { title: 'Chrome Extension Developer Guide', url: 'https://developer.chrome.com', favicon: '' },
@@ -9,7 +9,7 @@ export const MOCK_COLLECTIONS = [
   },
   {
     id: 'col-2',
-    name: '🎨 Design Inspiration',
+    name: 'Design Inspiration',
     tabs: [
       { title: 'Dribbble - Discover Design', url: 'https://dribbble.com', favicon: '' },
       { title: 'Awwwards - Website Awards', url: 'https://awwwards.com', favicon: '' },

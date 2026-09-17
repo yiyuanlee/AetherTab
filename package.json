@@ -2,10 +2,12 @@
   "name": "aethertab",
   "version": "1.0.0",
   "private": true,
-  "description": "Save open Chrome tabs into collections, close them, and reopen from a glassmorphic new tab. Local, no account needed.",
+  "type": "module",
+  "description": "Save Chrome tabs into collections, import and organize bookmarks. Local workspace, no account needed.",
   "homepage": "https://aethertab.com/",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
     "icons": "python generate_icons.py icons",
     "dev": "echo Load unpacked in chrome://extensions — no dev server needed",
     "test:preview": "node scripts/run-test-preview.mjs",

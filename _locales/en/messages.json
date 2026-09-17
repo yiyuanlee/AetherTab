@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "AetherTab - Tab Manager & New Tab Dashboard",
+    "message": "AetherTab - Tab & Bookmark Manager",
     "description": "Extension name shown in Chrome and the Web Store"
   },
   "extDescription": {
-    "message": "Save open Chrome tabs into collections, close them, and reopen from a glassmorphic new tab. Local, no account needed.",
+    "message": "Save Chrome tabs into collections, import and organize bookmarks. Local workspace, no account needed.",
     "description": "Short description (132 characters max)"
   }
 }

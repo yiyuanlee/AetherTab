@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-color-scheme="default">
+<html lang="en" data-theme="light" data-color-scheme="default">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AetherTab is a premium, glassmorphic Chrome extension that overrides the New Tab page to help you save, organize, and manage browser tabs in beautiful, custom collections.">
-  <title>AetherTab | Premium Tab Manager</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="newtab.css?v=onboarding">
+  <meta name="description" content="AetherTab is a calm Chrome new-tab workspace for saving, organizing, importing, and sharing useful links.">
+  <title>AetherTab — A calmer new tab</title>
+  <link rel="stylesheet" href="newtab.css?v=themes-4">
 </head>
 <body>
   <div class="app-container">
@@ -53,31 +50,19 @@
           <span class="sync-status-dot" aria-hidden="true"></span>
         </button>
         <div class="color-scheme-picker" id="color-scheme-picker">
-          <span class="color-scheme-label">Accent</span>
-          <div class="color-scheme-options" role="radiogroup" aria-label="Color theme">
-            <button type="button" class="color-scheme-btn active" data-scheme="default" title="Default — Aether Purple" aria-label="Default theme">
-              <span class="scheme-flag" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="flag-default" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#ec4899"/></linearGradient></defs><rect width="30" height="20" rx="3" fill="url(#flag-default)"/></svg></span>
+          <span class="color-scheme-label">Theme</span>
+          <div class="color-scheme-options" role="radiogroup" aria-label="Page color theme">
+            <button type="button" class="color-scheme-btn active" data-scheme="default" title="Blue" aria-label="Blue theme">
+              <span class="scheme-flag" aria-hidden="true"></span>
             </button>
-            <button type="button" class="color-scheme-btn" data-scheme="argentina" title="Argentina — Sky Blue & White" aria-label="Argentina theme">
-              <span class="scheme-flag" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="6.67" fill="#75aadb"/><rect y="6.67" width="30" height="6.67" fill="#fff"/><rect y="13.33" width="30" height="6.67" fill="#75aadb"/><circle cx="15" cy="10" r="2.5" fill="#f6b40e"/></svg></span>
+            <button type="button" class="color-scheme-btn" data-scheme="sage" title="Sage" aria-label="Sage theme">
+              <span class="scheme-flag" aria-hidden="true"></span>
             </button>
-            <button type="button" class="color-scheme-btn" data-scheme="portugal" title="Portugal — Green & Red" aria-label="Portugal theme">
-              <span class="scheme-flag" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="12" height="20" fill="#006600"/><rect x="12" width="18" height="20" fill="#ff0000"/><circle cx="12" cy="10" r="4" fill="#ffcc00" stroke="#fff" stroke-width="0.6"/><rect x="10.5" y="8" width="3" height="4" fill="#fff" opacity="0.85"/></svg></span>
+            <button type="button" class="color-scheme-btn" data-scheme="lilac" title="Lilac" aria-label="Lilac theme">
+              <span class="scheme-flag" aria-hidden="true"></span>
             </button>
-            <button type="button" class="color-scheme-btn" data-scheme="france" title="France — Navy Blue & Red" aria-label="France theme">
-              <span class="scheme-flag" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ed2939"/></svg></span>
-            </button>
-            <button type="button" class="color-scheme-btn" data-scheme="brazil" title="Brazil — Green & Yellow" aria-label="Brazil theme">
-              <span class="scheme-flag" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#009c3b"/><polygon points="15,2 28,10 15,18 2,10" fill="#ffdf00"/><circle cx="15" cy="10" r="4" fill="#002776"/></svg></span>
-            </button>
-            <button type="button" class="color-scheme-btn" data-scheme="germany" title="Germany — Black, Red & Gold" aria-label="Germany theme">
-              <span class="scheme-flag" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="6.67" fill="#000"/><rect y="6.67" width="30" height="6.67" fill="#dd0000"/><rect y="13.33" width="30" height="6.67" fill="#ffce00"/></svg></span>
-            </button>
-            <button type="button" class="color-scheme-btn" data-scheme="england" title="England — Red & White" aria-label="England theme">
-              <span class="scheme-flag" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#fff"/><rect x="12.5" width="5" height="20" fill="#ce1124"/><rect y="7.5" width="30" height="5" fill="#ce1124"/></svg></span>
-            </button>
-            <button type="button" class="color-scheme-btn" data-scheme="spain" title="Spain — Red & Yellow" aria-label="Spain theme">
-              <span class="scheme-flag" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="5" fill="#c60b1e"/><rect y="5" width="30" height="10" fill="#ffc400"/><rect y="15" width="30" height="5" fill="#c60b1e"/></svg></span>
+            <button type="button" class="color-scheme-btn" data-scheme="sand" title="Sand" aria-label="Sand theme">
+              <span class="scheme-flag" aria-hidden="true"></span>
             </button>
           </div>
         </div>
@@ -165,11 +150,21 @@
 
       <section class="collections-container">
         <div class="collections-header">
-          <h2>My Collections</h2>
-          <button id="new-collection-btn" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            Create Collection
-          </button>
+          <h2>Collections</h2>
+          <div class="collections-toolbar">
+            <button id="import-bookmarks-btn" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><polyline points="7 10 12 15 17 10"></polyline><path d="M5 21h14a2 2 0 0 0 2-2v-3"></path><path d="M3 16v3a2 2 0 0 0 2 2"></path></svg>
+              Import
+            </button>
+            <button id="smart-organize-btn" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.4 3.6L7 8l3.6 1.4L12 13l1.4-3.6L17 8l-3.6-1.4L12 3Z"></path><path d="m19 14-.8 2.2L16 17l2.2.8L19 20l.8-2.2L22 17l-2.2-.8L19 14Z"></path><path d="m5 13-1 2.5L1.5 16.5 4 17.5 5 20l1-2.5 2.5-1L6 15.5 5 13Z"></path></svg>
+              Organize
+            </button>
+            <button id="new-collection-btn" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              New Collection
+            </button>
+          </div>
         </div>
 
         <div class="collections-grid" id="collections-grid">
@@ -221,6 +216,132 @@
     </div>
   </div>
 
-  <script type="module" src="js/app.js"></script>
+  <!-- Bookmark import and local smart organization workflow -->
+  <div class="modal-overlay hidden" id="bookmark-tools-modal" aria-hidden="true">
+    <div class="modal-card bookmark-tools-card" role="dialog" aria-modal="true" aria-labelledby="bookmark-tools-title">
+      <div class="modal-header bookmark-tools-header">
+        <div>
+          <span class="modal-eyebrow">Library</span>
+          <h3 id="bookmark-tools-title">Import bookmarks</h3>
+          <p id="bookmark-tools-subtitle">Choose a source and preview everything before saving.</p>
+        </div>
+        <button class="close-modal-btn" id="bookmark-tools-close" type="button" aria-label="Close bookmark tools">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="modal-body bookmark-tools-body">
+        <section id="bookmark-source-panel" class="bookmark-workflow-section" aria-labelledby="bookmark-source-heading">
+          <div class="workflow-section-heading">
+              <span>1</span>
+            <div><strong id="bookmark-source-heading">Choose a source</strong><small>All parsing happens on this device.</small></div>
+          </div>
+
+          <div class="bookmark-source-grid">
+            <button id="browser-bookmarks-source" class="bookmark-source-card" type="button">
+              <span class="source-card-icon">
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2L5.8 21 7 14.2l-5-4.9 6.9-1L12 2Z"></path></svg>
+              </span>
+              <span><strong>Browser bookmarks</strong><small>Read directly from Chrome</small></span>
+            </button>
+            <button id="bookmark-file-source" class="bookmark-source-card" type="button">
+              <span class="source-card-icon">
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M12 18v-6"></path><polyline points="9 15 12 12 15 15"></polyline></svg>
+              </span>
+              <span><strong>HTML, JSON or TXT</strong><small>Chrome, Toby, or share file</small></span>
+            </button>
+            <input id="bookmark-file-input" class="hidden" type="file" accept=".html,.htm,.json,.txt,.aethertab">
+          </div>
+
+          <div class="bookmark-code-import">
+            <label for="bookmark-share-code">Received a collection?</label>
+            <div>
+              <textarea id="bookmark-share-code" rows="2" placeholder="Paste an AETHERTAB1 share code or direct share link"></textarea>
+              <button id="load-share-code-btn" class="btn btn-secondary" type="button">Load code</button>
+            </div>
+          </div>
+
+          <div id="bookmark-source-status" class="bookmark-source-status idle" aria-live="polite">
+            <span class="source-status-dot" aria-hidden="true"></span>
+            <span>Choose a source to build a private local preview.</span>
+          </div>
+        </section>
+
+        <section id="bookmark-mode-panel" class="bookmark-workflow-section" aria-labelledby="bookmark-mode-heading">
+          <div class="workflow-section-heading">
+              <span>2</span>
+            <div><strong id="bookmark-mode-heading">Choose the layout</strong><small>You can rename or move anything later.</small></div>
+          </div>
+
+          <div class="bookmark-mode-options">
+            <label class="bookmark-mode-option">
+              <input type="radio" name="bookmark-import-mode" value="smart" checked>
+              <span><strong>By category</strong><small>Sort by site, title, keywords, and folder context.</small></span>
+            </label>
+            <label class="bookmark-mode-option">
+              <input type="radio" name="bookmark-import-mode" value="folders">
+              <span><strong>Keep folders</strong><small>Turn existing browser folders into collections.</small></span>
+            </label>
+            <label class="bookmark-mode-option">
+              <input type="radio" name="bookmark-import-mode" value="single">
+              <span><strong>One collection</strong><small>Put every imported link together.</small></span>
+            </label>
+          </div>
+        </section>
+
+        <section id="bookmark-import-preview" class="bookmark-workflow-section hidden" aria-labelledby="bookmark-preview-heading">
+          <div class="workflow-section-heading">
+            <span>3</span>
+            <div><strong id="bookmark-preview-heading">Review the result</strong><small>Duplicate and unsafe URLs are excluded automatically.</small></div>
+          </div>
+          <div id="bookmark-preview-summary" class="bookmark-preview-summary"></div>
+          <div id="bookmark-preview-groups" class="bookmark-preview-groups"></div>
+        </section>
+      </div>
+
+      <div class="modal-footer bookmark-tools-footer">
+        <p><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Private by design · no bookmark content is uploaded</p>
+        <div>
+          <button class="btn btn-secondary" id="bookmark-tools-cancel" type="button">Cancel</button>
+          <button class="btn btn-primary" id="bookmark-tools-confirm" type="button" disabled>Import links</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portable collection sharing -->
+  <div class="modal-overlay hidden" id="share-collection-modal" aria-hidden="true">
+    <div class="modal-card share-collection-card" role="dialog" aria-modal="true" aria-labelledby="share-dialog-title">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">Portable collection</span>
+          <h3 id="share-dialog-title">Share collection</h3>
+        </div>
+        <button class="close-modal-btn" id="share-collection-close" type="button" aria-label="Close sharing dialog">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body share-collection-body">
+        <div class="share-collection-summary">
+          <span class="share-summary-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2Z"></path></svg>
+          </span>
+          <div><strong id="share-collection-name">Collection</strong><span id="share-collection-meta">0 web links</span></div>
+        </div>
+        <p class="share-description">The receiver can import this collection without an account. Titles and URLs are included; browsing history and personal settings are not.</p>
+        <div class="share-action-grid">
+          <button id="share-copy-code-btn" class="share-action" type="button"><span>⌘</span><strong>Copy share code</strong><small>Works across installations</small></button>
+          <button id="share-copy-link-btn" class="share-action" type="button"><span>↗</span><strong>Copy direct link</strong><small>One-click import when supported</small></button>
+          <button id="share-download-btn" class="share-action" type="button"><span>↓</span><strong>Download file</strong><small>Portable JSON backup</small></button>
+          <button id="share-native-btn" class="share-action" type="button"><span>•••</span><strong>Share via…</strong><small>Use the system share sheet</small></button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="share-collection-done" type="button">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js?v=1.5.3"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ Title (from the packaged extension; max 75 characters):
 AetherTab - Tab Manager & New Tab Dashboard
 
 Summary (from the packaged extension; max 132 characters):
-Save open Chrome tabs into collections, close them, and reopen from a glassmorphic new tab. Local, no account needed.
+Save Chrome tabs into collections, import and organize bookmarks. Local workspace, no account needed.
 
 Category:
 Productivity

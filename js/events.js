@@ -2,11 +2,12 @@ import { isChromeExtension } from './storage.js';
 import { dom } from './state.js';
 import { createNewCollection, saveSession, loadData } from './collections.js';
 import { initSync, toggleSync } from './sync.js';
-import { toggleTheme, selectColorScheme } from './widgets.js';
+import { toggleTheme, selectColorScheme } from './widgets.js?v=1.5.3';
 import { renderActiveTabs, renderCollections } from './render.js';
 import { refreshActiveTabs } from './tabs.js';
 import { setupModalListeners } from './modal.js';
 import { setupKeyboardShortcuts } from './shortcuts.js';
+import { setupBookmarkTools } from './bookmark-manager.js';
 
 export function setupEventListeners() {
   dom.toggleSidebarBtn.addEventListener('click', () => {
@@ -34,6 +35,7 @@ export function setupEventListeners() {
   dom.syncToggleBtn?.addEventListener('click', toggleSync);
 
   setupModalListeners();
+  setupBookmarkTools();
   setupKeyboardShortcuts();
   initSync();
 

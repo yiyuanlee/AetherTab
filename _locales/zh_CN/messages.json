@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "AetherTab - 标签页管理与新标签页工作台",
+    "message": "AetherTab - 标签页与书签管理工作台",
     "description": "扩展在 Chrome 和商店中显示的名称"
   },
   "extDescription": {
-    "message": "把打开的标签拖进分类收藏，保存后自动关闭，在毛玻璃新标签页里随时打开。数据在本地，不用注册。",
+    "message": "保存标签页到收藏夹，导入并智能整理书签。数据在本地，不用注册账号。",
     "description": "商店短描述（132 字符以内）"
   }
 }
