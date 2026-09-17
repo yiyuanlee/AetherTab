@@ -1,0 +1,64 @@
+﻿Paste into Chrome Web Store Dashboard → Store listing → English.
+
+Title (from the packaged extension; max 75 characters):
+AetherTab - Tab Manager & New Tab Dashboard
+
+Summary (from the packaged extension; max 132 characters):
+Save open Chrome tabs into collections, close them, and reopen from a glassmorphic new tab. Local, no account needed.
+
+Category:
+Productivity
+
+Language:
+English (add Chinese Simplified after uploading a build that includes _locales/zh_CN)
+
+Homepage URL:
+https://aethertab.com/
+
+Privacy policy URL:
+https://aethertab.com/privacy.html
+
+Support URL:
+https://github.com/yiyuanlee/AetherTab/issues
+
+Official URL / verified publisher:
+https://aethertab.com/
+
+YouTube promo (Unlisted is fine):
+Upload promo/aethertab-demo.mp4, then paste the watch URL here.
+
+Screenshots (1280x800), in this order:
+1. promo/aethertab-dark-1280x800.png
+2. promo/aethertab-light-1280x800.png
+3. promo/aethertab-drag-1280x800.png
+4. promo/aethertab-group-1280x800.png
+5. promo/aethertab-search-1280x800.png
+
+Small promo tile:
+promo/aethertab-small-promo-440x280.png
+
+Marquee:
+promo/aethertab-marquee-1400x560.png
+
+----- Detailed description (paste below this line) -----
+
+AetherTab replaces Chrome's new tab page with a glassmorphic workspace for saving and organizing tabs.
+
+Drag an open tab from the sidebar into a collection. AetherTab saves the page and closes that tab so the window stays clear. Open anything back with one click.
+
+What you can do
+• Drag open tabs into collections, then close them automatically
+• Group saved pages by site into collapsible folders
+• Filter inside a single collection without searching the whole workspace
+• Check local weather from the header, with GPS or a city search
+• Switch between dark and light themes
+• Keep collections on this browser with Chrome storage. No account.
+
+Who it is for
+People who keep dozens of tabs open for work, research, or side projects and want them sorted without signing in.
+
+Privacy
+AetherTab uses the tabs permission to list, save, and close tabs. Collections, theme, and weather settings stay in chrome.storage on your device. Geolocation is optional and only used for the weather card; you can type a city instead. Weather forecasts come from Open-Meteo. Optional GPS reverse-geocoding uses BigDataCloud. Favicons use Chrome's favicon API. AetherTab does not create accounts and does not upload your collections to our servers.
+
+Open source
+https://github.com/yiyuanlee/AetherTab

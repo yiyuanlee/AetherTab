@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy | AetherTab</title>
+  <meta name="description" content="AetherTab stores collections on your device. Weather may use optional location or a city name. No account, no tracking.">
+  <link rel="canonical" href="https://aethertab.com/privacy.html">
+  <meta property="og:title" content="Privacy Policy | AetherTab">
+  <meta property="og:description" content="AetherTab stores collections on your device. Weather may use optional location or a city name. No account, no tracking.">
+  <meta property="og:url" content="https://aethertab.com/privacy.html">
+  <meta property="og:image" content="https://aethertab.com/assets/aethertab-dark-1280x800.png">
+  <link rel="icon" href="assets/icon128.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;650;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./">AetherTab</a>
+      <nav class="nav">
+        <a href="privacy.html">Privacy</a>
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap article">
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated September 17, 2026. This page describes the AetherTab Chrome extension published at the Chrome Web Store and documented at <a href="https://github.com/yiyuanlee/AetherTab">github.com/yiyuanlee/AetherTab</a>.</p>
+
+    <h2>What AetherTab stores on your device</h2>
+    <p>Collections (saved pages and their titles/URLs), theme preference, weather unit, weather location, and a short-lived weather cache are written with <code>chrome.storage.local</code>. In the local preview file they fall back to <code>localStorage</code>. That data does not go to an AetherTab server. There is no AetherTab account.</p>
+
+    <h2>Permissions</h2>
+    <ul>
+      <li><strong>tabs</strong> lists open tabs so you can save, drag, and close them. AetherTab reads tab titles and URLs for that purpose.</li>
+      <li><strong>storage</strong> keeps collections and settings on this browser.</li>
+      <li><strong>favicon</strong> loads site icons through Chrome's favicon API.</li>
+      <li><strong>geolocation</strong> is optional. It is used only if you press GPS on the weather card. You can type a city name instead.</li>
+    </ul>
+
+    <h2>Network requests we do not control</h2>
+    <p>Weather forecasts are requested from Open-Meteo (<code>api.open-meteo.com</code> and <code>geocoding-api.open-meteo.com</code>). If you use GPS, AetherTab asks BigDataCloud to turn coordinates into a place name. Those operators receive the request your browser sends (coordinates or city query, plus ordinary HTTP metadata). AetherTab does not send your collections to them.</p>
+    <p>The unpackaged HTML preview may load favicons from Google's public favicon service. The installed extension uses Chrome's own favicon API instead.</p>
+
+    <h2>What we do not do</h2>
+    <p>AetherTab does not include analytics, ads, or account signup. It does not sell data. It does not upload saved collections to a developer-operated backend because this project does not run one.</p>
+
+    <h2>This website</h2>
+    <p>The marketing pages at aethertab.com are static files. They do not set an analytics cookie. Chrome Web Store and GitHub are separate services with their own policies if you leave this site to install the extension or view source.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy: open an issue at <a href="https://github.com/yiyuanlee/AetherTab/issues">github.com/yiyuanlee/AetherTab/issues</a>.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 AetherTab</span>
+      <nav>
+        <a href="./">Home</a>
+        <a href="https://github.com/yiyuanlee/AetherTab">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

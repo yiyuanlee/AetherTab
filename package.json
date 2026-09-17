@@ -2,13 +2,16 @@
   "name": "aethertab",
   "version": "1.0.0",
   "private": true,
-  "description": "A premium, glassmorphic Chrome tab manager",
+  "description": "Save open Chrome tabs into collections, close them, and reopen from a glassmorphic new tab. Local, no account needed.",
+  "homepage": "https://aethertab.com/",
   "scripts": {
     "build": "node scripts/build.mjs",
     "icons": "python generate_icons.py icons",
-    "dev": "echo Load unpacked in chrome://extensions — no dev server needed"
+    "dev": "echo Load unpacked in chrome://extensions — no dev server needed",
+    "promo": "node scripts/capture-promo.mjs"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "playwright": "^1.62.1"
   }
 }

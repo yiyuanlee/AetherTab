@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toby alternative with no login | AetherTab</title>
+  <meta name="description" content="AetherTab is a local Chrome tab manager on the new tab page. No account. Drag tabs into collections and close them.">
+  <link rel="canonical" href="https://aethertab.com/toby-alternative.html">
+  <meta property="og:title" content="Toby alternative with no login | AetherTab">
+  <meta property="og:description" content="AetherTab is a local Chrome tab manager on the new tab page. No account. Drag tabs into collections and close them.">
+  <meta property="og:url" content="https://aethertab.com/toby-alternative.html">
+  <meta property="og:image" content="https://aethertab.com/assets/aethertab-group-1280x800.png">
+  <link rel="icon" href="assets/icon128.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;650;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./">AetherTab</a>
+      <nav class="nav">
+        <a href="save-chrome-tabs.html">Save tabs</a>
+        <a href="toby-alternative.html">Toby alternative</a>
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap article">
+    <p class="kicker">Comparison</p>
+    <h1>A Toby-style workspace that does not need a login</h1>
+    <p>Toby popularized collections of tabs on a new tab page. AetherTab copies that job with a narrower contract: the dashboard is local, open source, and does not ask you to create an AetherTab account.</p>
+    <p>This page only lists differences you can check in the installed extension and the public repository. It is not a review of Toby's current paid plans.</p>
+
+    <table class="compare">
+      <thead>
+        <tr>
+          <th></th>
+          <th>AetherTab</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Account</th>
+          <td>None. There is no signup screen.</td>
+        </tr>
+        <tr>
+          <th scope="row">Where collections live</th>
+          <td><code>chrome.storage.local</code> on this browser. Uninstalling the extension removes that data unless you export it yourself.</td>
+        </tr>
+        <tr>
+          <th scope="row">Surface</th>
+          <td>Replaces the new tab page. Open tabs stay in a sidebar on that same page.</td>
+        </tr>
+        <tr>
+          <th scope="row">Save and close</th>
+          <td>Drag a live tab onto a collection. The page is saved, then Chrome closes that tab.</td>
+        </tr>
+        <tr>
+          <th scope="row">Source</th>
+          <td>MIT licensed at <a href="https://github.com/yiyuanlee/AetherTab">github.com/yiyuanlee/AetherTab</a>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>What you give up</h2>
+    <p>Because collections stay on the device, a second computer does not see them unless Chrome syncs that storage through your Google account, or you copy data by hand. AetherTab is the wrong tool if you need a hosted team workspace.</p>
+
+    <h2>What the dashboard adds on top of a list</h2>
+    <p>Domain grouping folds same-site pages into folders on a card. Card search filters one collection. The header has a clock and an optional weather card. Light and dark themes are a single toggle.</p>
+    <figure class="shot">
+      <img src="assets/aethertab-group-1280x800.png" width="1280" height="800" alt="AetherTab collection with saved tabs grouped by website">
+    </figure>
+
+    <div class="cta-band">
+      <p>Install from the Chrome Web Store. Read the <a href="privacy.html">privacy policy</a> before you grant location access for weather.</p>
+      <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok">Add to Chrome</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 AetherTab</span>
+      <nav>
+        <a href="./">Home</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

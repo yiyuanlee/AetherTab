@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AetherTab | Tab Manager & New Tab Dashboard</title>
+  <meta name="description" content="Save open Chrome tabs into collections, close them, and reopen from a glassmorphic new tab. Local, no account needed.">
+  <link rel="canonical" href="https://aethertab.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AetherTab | Tab Manager & New Tab Dashboard">
+  <meta property="og:description" content="Save open Chrome tabs into collections, close them, and reopen from a glassmorphic new tab. Local, no account needed.">
+  <meta property="og:url" content="https://aethertab.com/">
+  <meta property="og:image" content="https://aethertab.com/assets/aethertab-dark-1280x800.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/icon128.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;650;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "AetherTab",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "description": "Save open Chrome tabs into collections, close them, and reopen from a glassmorphic new tab. Local, no account needed.",
+    "url": "https://aethertab.com/",
+    "downloadUrl": "https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok",
+    "image": "https://aethertab.com/assets/aethertab-dark-1280x800.png",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "yiyuanlee", "url": "https://github.com/yiyuanlee/AetherTab" }
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <defs>
+            <linearGradient id="logo" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8b5cf6"/>
+              <stop offset="100%" stop-color="#ec4899"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#logo)" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+        AetherTab
+      </a>
+      <nav class="nav">
+        <a class="hide-sm" href="save-chrome-tabs.html">Save tabs</a>
+        <a class="hide-sm" href="toby-alternative.html">Toby alternative</a>
+        <a href="privacy.html">Privacy</a>
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <p class="kicker">Chrome tab manager</p>
+      <h1>A tab manager that lives on your new tab page</h1>
+      <p class="lead">Save open Chrome tabs into collections, close them, and reopen them from a glassmorphic dashboard. Everything stays on your machine. No account.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok">Add to Chrome</a>
+        <a class="btn btn-ghost" href="https://github.com/yiyuanlee/AetherTab">View source</a>
+      </div>
+      <figure class="shot">
+        <img src="assets/aethertab-dark-1280x800.png" width="1280" height="800" alt="AetherTab dark new tab dashboard with open tabs in the sidebar and saved collections">
+      </figure>
+      <p class="caption">The new tab page is the workspace. Open tabs sit on the left. Collections sit on the right.</p>
+    </section>
+
+    <section class="features wrap">
+      <h2>Built for a messy tab strip</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Drag, save, close</h3>
+          <p>Drop an open tab onto a collection. AetherTab stores the page and closes the tab so the window thins out immediately.</p>
+        </article>
+        <article class="card">
+          <h3>Group by site</h3>
+          <p>Same-domain pages fold into collapsible folders, such as three Google Docs sitting in one stack instead of a long list.</p>
+        </article>
+        <article class="card">
+          <h3>Search inside a collection</h3>
+          <p>Filter one card without scanning the rest of the dashboard. Useful when a research pile has grown.</p>
+        </article>
+        <article class="card">
+          <h3>Local by default</h3>
+          <p>Collections, theme, and weather settings use Chrome storage on this browser. There is no AetherTab login.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="steps wrap">
+      <h2>How a session gets cleared</h2>
+      <ol>
+        <li><strong>1. Park the live tabs</strong><span>The sidebar lists what is open right now. Drag one tab, or save the whole window as a session.</span></li>
+        <li><strong>2. File it in a collection</strong><span>Work, reading, a single project. Domain grouping and the card search sit on the collection itself.</span></li>
+        <li><strong>3. Open it later from the new tab page</strong><span>Click a saved page, or restore a whole collection, without hunting through the tab strip.</span></li>
+      </ol>
+      <p><a href="save-chrome-tabs.html">Step-by-step: save Chrome tabs into collections</a> · <a href="toby-alternative.html">How this differs from Toby</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 AetherTab</span>
+      <nav>
+        <a href="privacy.html">Privacy</a>
+        <a href="https://github.com/yiyuanlee/AetherTab">GitHub</a>
+        <a href="https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok">Chrome Web Store</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
