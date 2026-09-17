@@ -8,6 +8,7 @@
     "build": "node scripts/build.mjs",
     "icons": "python generate_icons.py icons",
     "dev": "echo Load unpacked in chrome://extensions — no dev server needed",
+    "test:preview": "node scripts/run-test-preview.mjs",
     "promo": "node scripts/capture-promo.mjs"
   },
   "devDependencies": {
