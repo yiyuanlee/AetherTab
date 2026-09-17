@@ -13,6 +13,10 @@ Thumbs.db
 # Dependencies
 node_modules/
 
+# Cloudflare Wrangler
+.wrangler/
+.dev.vars
+
 # Build output (optional bundle)
 dist/
 

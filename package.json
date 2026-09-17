@@ -11,10 +11,13 @@
     "icons": "python generate_icons.py icons",
     "dev": "echo Load unpacked in chrome://extensions — no dev server needed",
     "test:preview": "node scripts/run-test-preview.mjs",
-    "promo": "node scripts/capture-promo.mjs"
+    "promo": "node scripts/capture-promo.mjs",
+    "preview:site": "wrangler dev",
+    "deploy:site": "wrangler deploy"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",
-    "playwright": "^1.62.1"
+    "playwright": "^1.62.1",
+    "wrangler": "^4.133.0"
   }
 }
