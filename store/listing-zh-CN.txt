@@ -1,13 +1,13 @@
 AetherTab — Chrome 商店简体中文详情
 
-标题（须与上传的扩展包一致）：
-AetherTab - 标签页与书签管理工作台
+标题（须与上传的扩展包一致，Chrome 上限 45 个字符）：
+AetherTab — 官方 Chrome 标签管理
 
 短描述（须与上传的扩展包一致）：
 保存标签页到收藏夹，导入并智能整理书签。数据在本地，不用注册账号。
 
 主页 / 官方网址：https://aethertab.com/
-隐私政策：https://aethertab.com/privacy.html
+隐私政策：https://aethertab.com/privacy
 支持：https://github.com/yiyuanlee/AetherTab/issues
 
 详细说明 — 从下方开始粘贴
@@ -36,5 +36,5 @@ AetherTab 将 Chrome 新标签页变成直观的标签页与书签工作区。�
 标签页权限用于列出、保存和关闭标签；书签权限用于直接导入 Chrome 书签；存储权限用于保存收藏夹和偏好。定位为可选功能，仅用于基于位置的天气查询。天气数据来自 Open-Meteo，可选的位置名称查询使用 BigDataCloud，网站图标使用 Chrome favicon API。AetherTab 不会将收藏夹发送到自己的服务器。启用 Chrome Sync 或主动分享收藏夹时，相应数据会用于同步或分享。
 
 官方网站与演示：https://aethertab.com/
-隐私政策：https://aethertab.com/privacy.html
+隐私政策：https://aethertab.com/privacy
 开源与支持：https://github.com/yiyuanlee/AetherTab

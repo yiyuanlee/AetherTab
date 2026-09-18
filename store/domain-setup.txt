@@ -1,26 +1,24 @@
 ﻿Buy aethertab.com if the retail price is normal. If it is taken or listed as aftermarket, buy aethertab.com instead, then change docs/CNAME, canonical URLs, and this file to match.
 
 Store listing paste files live in store/listing-en.txt and store/listing-zh-CN.txt.
-Site files live in docs/. Do not install a VPS, paid CDN, or Google Workspace for this.
+Site files live in docs/. Canonical paths have no .html (https://aethertab.com/privacy). Do not install a VPS, paid CDN, or Google Workspace for this.
 
 --------------------------------------------------
-Option A. Cloudflare Registrar + Cloudflare Pages (preferred)
+Option A. Cloudflare Registrar + Workers (current)
 --------------------------------------------------
 1. Create a Cloudflare account and register the domain at cost.
-2. In the repo, docs/ is already the site root (see wrangler.toml).
-3. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect GitHub → yiyuanlee/AetherTab.
-   Build command: (leave empty)
-   Output directory: docs
-4. Custom domains → add apex and www.
-5. Redirect www → apex (or the reverse). Keep one canonical host.
-6. SSL/TLS stays on Full (strict). Cloudflare issues the certificate.
+2. Deploy from this repo: npm run deploy:site (wrangler.jsonc, assets in docs/).
+3. Workers & Pages → aethertab → Settings → Domains:
+   - aethertab.com (apex)
+   - www.aethertab.com
+   Cloudflare will create the www CNAME. site-worker.js 301s www → apex
+   and *.html → the pretty URL.
+4. SSL/TLS stays on Full (strict). Cloudflare issues the certificate.
 
-DNS if you point Pages yourself:
-  CNAME  @    <project>.pages.dev   (Cloudflare flattens apex)
-  CNAME  www  <project>.pages.dev
+Do not leave www pointing at a different host. Apex is canonical.
 
 --------------------------------------------------
-Option B. GitHub Pages
+Option B. GitHub Pages (fallback, not in use)
 --------------------------------------------------
 1. GitHub repo Settings → Pages → Deploy from a branch → main → /docs.
 2. Custom domain: aethertab.com (must match docs/CNAME).
@@ -39,12 +37,19 @@ AAAA  @     2606:50c0:8003::153
 CNAME www   yiyuanlee.github.io
 
 --------------------------------------------------
-Google Search Console
+Google Search Console (domain property)
 --------------------------------------------------
-1. Add a Domain property for aethertab.com (or .com).
-2. Put the TXT record Cloudflare / GitHub shows you at the apex.
-3. Submit https://aethertab.com/sitemap.xml
-4. In Chrome Web Store Dashboard, add this domain as Homepage, Privacy policy, and Official URL.
+Use a Domain property, not a URL-prefix property. That covers
+https://aethertab.com and https://www.aethertab.com together.
+
+1. https://search.google.com/search-console → Add property → Domain → aethertab.com
+2. Copy the TXT record. Cloudflare DNS → Add TXT on @ (root) → Save.
+3. Click Verify in Search Console.
+4. Sitemaps → add https://aethertab.com/sitemap.xml → Submit.
+5. URL inspection → https://aethertab.com/ → Request indexing.
+   Then request /privacy, /save-chrome-tabs, /toby-alternative.
+6. Chrome Web Store Dashboard: Homepage, Privacy policy, and Official URL
+   must match the canonical paths in store/listing-en.txt.
 
 --------------------------------------------------
 Email (optional, free)
@@ -53,13 +58,21 @@ Cloudflare Email Routing → hello@aethertab.com → forward to your existing in
 Do not buy Google Workspace for this site.
 
 --------------------------------------------------
-After the domain is live
+After the domain is live — same URL everywhere
 --------------------------------------------------
-Chrome Web Store → Store listing:
+Chrome Web Store → Store listing (paste store/listing-en.txt):
+  Item name    AetherTab — Official Chrome Tab Manager
+               (not the short name "AetherTab"; that collides with
+               "AetherTab - Speed Dial Launchpad")
   Homepage     https://aethertab.com/
-  Privacy      https://aethertab.com/privacy.html
+  Privacy      https://aethertab.com/privacy
   Support      https://github.com/yiyuanlee/AetherTab/issues
+  Official URL https://aethertab.com/
 
 GitHub repo About:
-  Website      https://aethertab.com
+  Website      https://aethertab.com/
   Topics       chrome-extension, tab-manager, new-tab, productivity, manifest-v3
+
+X / Twitter profile (https://x.com/yuanlogs):
+  Website      https://aethertab.com/
+  Bio          mention Official Chrome tab manager, not only the word AetherTab

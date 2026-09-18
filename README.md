@@ -33,7 +33,7 @@ For Toby imports, AetherTab supports both legacy lists/cards and newer spaces/co
 
 Collections and preferences are stored in Chrome storage. Bookmark parsing, categorization, and duplicate detection run on your device. Chrome Sync is optional; sharing a collection exports its name, link titles, and URLs. Weather requests use a city or location, and location permission is requested when you choose location-based weather.
 
-See the [privacy policy](https://aethertab.com/privacy.html) for details.
+See the [privacy policy](https://aethertab.com/privacy) for details.
 
 ## Development
 

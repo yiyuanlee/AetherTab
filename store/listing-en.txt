@@ -1,7 +1,7 @@
 AetherTab — English Chrome Web Store listing
 
-Name (must match the uploaded extension):
-AetherTab - Tab & Bookmark Manager
+Name (must match the uploaded extension; max 45 characters in Chrome):
+AetherTab — Official Chrome Tab Manager
 
 Short description (must match the uploaded extension):
 Save Chrome tabs into collections, import and organize bookmarks. Local workspace, no account needed.
@@ -9,7 +9,7 @@ Save Chrome tabs into collections, import and organize bookmarks. Local workspac
 Homepage / Official URL:
 https://aethertab.com/
 Privacy policy:
-https://aethertab.com/privacy.html
+https://aethertab.com/privacy
 Support:
 https://github.com/yiyuanlee/AetherTab/issues
 
@@ -39,5 +39,5 @@ PRIVACY AND PERMISSIONS
 AetherTab uses tabs access to list, save, and close tabs, bookmarks access for direct Chrome bookmark imports, and storage for collections and preferences. Location access is optional and used for location-based weather. Weather requests go to Open-Meteo; optional location lookup uses BigDataCloud. Website icons use Chrome's favicon API. AetherTab does not send your collections to its own servers. Optional Chrome Sync and explicit collection sharing transfer data when you enable or use them.
 
 Official website and demo: https://aethertab.com/
-Privacy policy: https://aethertab.com/privacy.html
+Privacy policy: https://aethertab.com/privacy
 Open source and support: https://github.com/yiyuanlee/AetherTab
