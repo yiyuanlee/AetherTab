@@ -1,64 +1,43 @@
-﻿Paste into Chrome Web Store Dashboard → Store listing → English.
+AetherTab — English Chrome Web Store listing
 
-Title (from the packaged extension; max 75 characters):
-AetherTab - Tab Manager & New Tab Dashboard
+Name (must match the uploaded extension):
+AetherTab - Tab & Bookmark Manager
 
-Summary (from the packaged extension; max 132 characters):
+Short description (must match the uploaded extension):
 Save Chrome tabs into collections, import and organize bookmarks. Local workspace, no account needed.
 
-Category:
-Productivity
-
-Language:
-English (add Chinese Simplified after uploading a build that includes _locales/zh_CN)
-
-Homepage URL:
+Homepage / Official URL:
 https://aethertab.com/
-
-Privacy policy URL:
+Privacy policy:
 https://aethertab.com/privacy.html
-
-Support URL:
+Support:
 https://github.com/yiyuanlee/AetherTab/issues
 
-Official URL / verified publisher:
-https://aethertab.com/
+DETAILED DESCRIPTION — paste the text below
 
-YouTube promo (Unlisted is fine):
-Upload promo/aethertab-demo.mp4, then paste the watch URL here.
+AetherTab turns your Chrome new tab page into a visual workspace for tabs and bookmarks. Save open tabs into collections, import your existing bookmarks, and return to a project without keeping every page open.
 
-Screenshots (1280x800), in this order:
-1. promo/aethertab-dark-1280x800.png
-2. promo/aethertab-light-1280x800.png
-3. promo/aethertab-drag-1280x800.png
-4. promo/aethertab-group-1280x800.png
-5. promo/aethertab-search-1280x800.png
+SAVE TABS AND SESSIONS
+Drag a tab from the sidebar into a collection to save the page and close the original tab. Use Save Session to save the current window, then reopen saved pages when you need them.
 
-Small promo tile:
-promo/aethertab-small-promo-440x280.png
+BRING YOUR BOOKMARKS
+Import Chrome bookmarks directly, or import browser HTML exports, Toby JSON/TXT exports, and AetherTab share files. Preview the import before saving. Both legacy and newer Toby export layouts are supported; Toby notes and tags are not imported.
 
-Marquee:
-promo/aethertab-marquee-1400x560.png
+ORGANIZE YOUR COLLECTIONS
+Keep research, reading lists, and projects in separate collections. Search within a collection, reorder saved links, or group pages by website. Bookmark categorization and duplicate detection run locally on your device.
 
------ Detailed description (paste below this line) -----
+SHARE USEFUL LINKS
+Share a collection as a portable code or JSON file. Direct import links are also available where the receiving AetherTab installation supports them. Shared collections include their name, link titles, and URLs.
 
-AetherTab replaces Chrome's new tab page with a glassmorphic workspace for saving and organizing tabs.
+MAKE YOUR NEW TAB YOUR OWN
+Choose from four accent themes with light and dark modes. Use keyboard shortcuts, undo delete, and an optional weather widget with city search or location access.
 
-Drag an open tab from the sidebar into a collection. AetherTab saves the page and closes that tab so the window stays clear. Open anything back with one click.
+LOCAL STORAGE, OPTIONAL SYNC
+No separate AetherTab account is required. Collections and preferences are stored in Chrome storage. Enable optional Chrome Sync to use collections across browsers signed in to the same Chrome account.
 
-What you can do
-• Drag open tabs into collections, then close them automatically
-• Group saved pages by site into collapsible folders
-• Filter inside a single collection without searching the whole workspace
-• Check local weather from the header, with GPS or a city search
-• Switch between dark and light themes
-• Keep collections on this browser with Chrome storage. No account.
+PRIVACY AND PERMISSIONS
+AetherTab uses tabs access to list, save, and close tabs, bookmarks access for direct Chrome bookmark imports, and storage for collections and preferences. Location access is optional and used for location-based weather. Weather requests go to Open-Meteo; optional location lookup uses BigDataCloud. Website icons use Chrome's favicon API. AetherTab does not send your collections to its own servers. Optional Chrome Sync and explicit collection sharing transfer data when you enable or use them.
 
-Who it is for
-People who keep dozens of tabs open for work, research, or side projects and want them sorted without signing in.
-
-Privacy
-AetherTab uses the tabs permission to list, save, and close tabs. Collections, theme, and weather settings stay in chrome.storage on your device. Geolocation is optional and only used for the weather card; you can type a city instead. Weather forecasts come from Open-Meteo. Optional GPS reverse-geocoding uses BigDataCloud. Favicons use Chrome's favicon API. AetherTab does not create accounts and does not upload your collections to our servers.
-
-Open source
-https://github.com/yiyuanlee/AetherTab
+Official website and demo: https://aethertab.com/
+Privacy policy: https://aethertab.com/privacy.html
+Open source and support: https://github.com/yiyuanlee/AetherTab
