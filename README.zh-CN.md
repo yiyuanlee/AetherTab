@@ -1,10 +1,16 @@
-# AetherTab
+# AetherTab — Chrome 标签页与书签管理工具
 
-[English](README.md)
+**[安装到 Chrome](https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok)** · [官方网站](https://aethertab.com/) · [观看操作演示](https://aethertab.com/#demo) · [English](README.md)
 
 **一个安静、直观的浏览器标签页工作区。**
 
 AetherTab 会替换 Chrome 的新标签页。你可以保存当前标签、将链接整理到收藏夹中，并在不堆满浏览器标签的情况下，随时回到重要工作。
+
+[![AetherTab 暗色新标签页与收藏夹界面](promo/aethertab-dark-1280x800.png)](https://aethertab.com/#demo)
+
+## 操作演示
+
+[观看 AetherTab 演示](https://aethertab.com/#demo)，了解如何将打开的标签保存到收藏夹。也可以[直接打开演示视频](promo/aethertab-demo.mp4)。
 
 ## 核心功能
 
@@ -21,13 +27,11 @@ AetherTab 会替换 Chrome 的新标签页。你可以保存当前标签、将�
 
 ## 快速开始
 
-1. 克隆或下载本仓库。
-2. 在 Chrome 中打开 `chrome://extensions`。
-3. 开启右上角的 **开发者模式**。
-4. 点击 **加载已解压的扩展程序**，并选择项目文件夹。
-5. 新建一个标签页即可使用。
+1. [从 Chrome 应用商店安装 AetherTab](https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok)。
+2. 新建一个标签页，为工作、学习或阅读创建收藏夹。
+3. 将侧边栏中的标签拖入收藏夹，或点击 **Import** 导入已有书签。
 
-如果只想预览界面，可直接在浏览器中打开 `newtab.html`。在非扩展环境中，页面会自动加载示例数据。
+无需单独注册 AetherTab 账号。[官方网站](https://aethertab.com/)提供产品介绍与演示。
 
 ## 使用方式
 
@@ -62,6 +66,8 @@ npm run build
 npm run test:preview
 ```
 
+本地安装：在 `chrome://extensions` 中开启 **开发者模式**，点击 **加载已解压的扩展程序** 并选择项目文件夹。直接打开 `newtab.html` 可使用示例数据预览界面。
+
 日常开发可直接使用 ES modules，不必每次构建；只有需要打包输出时才运行构建命令。
 
 ## 项目结构
@@ -84,7 +90,13 @@ manifest.json      Chrome 扩展配置
 
 ## 隐私
 
-收藏夹与偏好保存在 Chrome 存储中。书签解析、去重与智能分类全部在当前设备本地运行；只有主动复制、下载或分享收藏夹时，相应内容才会离开设备。跨设备同步为可选功能，只有开启后才会使用 Chrome Sync。只有在你选择使用基于位置的天气功能时，扩展才会请求位置权限。
+收藏夹与偏好保存在 Chrome 存储中。书签解析、去重与智能分类全部在当前设备本地运行。跨设备同步为可选功能，开启后会使用 Chrome Sync；主动分享收藏夹时会导出名称、链接标题与网址。天气查询会使用城市或位置，只有选择基于位置的天气功能时，扩展才会请求位置权限。
+
+完整说明见[隐私政策](https://aethertab.com/privacy.html)。
+
+## 问题与建议
+
+欢迎[提交问题或功能建议](https://github.com/yiyuanlee/AetherTab/issues)。报告问题时请附上复现步骤、Chrome 版本与 AetherTab 版本。
 
 ## 许可证
 

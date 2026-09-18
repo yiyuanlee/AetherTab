@@ -1,53 +1,58 @@
-# AetherTab
+# AetherTab — Chrome Tab & Bookmark Manager
 
-Chrome tab manager on the new tab page. Save open tabs into collections, close them, and reopen them later. Local storage. No account.
+**Save your tabs. Organize your bookmarks. Open a calmer new tab.**
 
-[![Add to Chrome](https://img.shields.io/badge/Chrome_Web_Store-Add_to_Chrome-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok)
-[![Website](https://img.shields.io/badge/aethertab.com-000000)](https://aethertab.com/)
+AetherTab is a Chrome extension that turns your new tab page into a visual workspace for tabs and bookmarks. Save open tabs into collections, import Chrome or Toby bookmarks, and return to your projects without keeping every page open. No separate AetherTab account is required.
 
-[中文文档](README.zh-CN.md)
+**[Add to Chrome](https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok)** · [Official website](https://aethertab.com/) · [Watch the demo](https://aethertab.com/#demo) · [中文文档](README.zh-CN.md)
 
-![AetherTab dark dashboard](promo/aethertab-dark-1280x800.png)
+[![AetherTab new tab page showing saved tab collections in dark mode](promo/aethertab-dark-1280x800.png)](https://aethertab.com/#demo)
 
-## Install
+## See it in action
 
-The usual path is the Chrome Web Store listing:
+[Watch the AetherTab demo](https://aethertab.com/#demo) to see an open tab move into a collection. You can also [open the demo video directly](promo/aethertab-demo.mp4).
 
-**[Add AetherTab to Chrome](https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok)**
+## What you can do
 
-Product page and privacy policy: [aethertab.com](https://aethertab.com/).
+- **Save tabs and sessions.** Drag an open tab into a collection to save it and close the original tab, or use **Save Session** to save the current window.
+- **Bring your bookmarks.** Import directly from Chrome, or use browser HTML exports, Toby JSON/TXT exports, and AetherTab share files.
+- **Organize locally.** Preview categories and remove duplicate links before importing. Search collections, reorder saved links, and group pages by site.
+- **Share a collection.** Export a share code or JSON file, or create a direct import link for another AetherTab installation.
+- **Choose your workspace.** Switch between four accent themes and light or dark mode. Use keyboard shortcuts, undo delete, and an optional weather widget.
+- **Enable Chrome Sync when needed.** Sync collections and preferences across browsers signed in to the same Chrome account.
 
-## What it does
+## Get started
 
-- Drag an open tab from the sidebar into a collection. AetherTab saves the page and closes the tab.
-- Save Session dumps the current window into a new collection.
-- Group saved pages by site, or filter inside one collection.
-- Cross-device sync via Chrome Sync (optional, enable in sidebar).
-- Keyboard shortcuts, undo delete, first-run onboarding.
-- Four accent themes, light and dark modes.
-- Weather card (optional GPS or a city name), clock.
-- Collections stay in `chrome.storage` on this browser.
+1. [Install AetherTab from the Chrome Web Store](https://chromewebstore.google.com/detail/aethertab/nnacnehbnklljafemehfhjekkoghfgok).
+2. Open a new tab and create a collection for a project, reading list, or daily work.
+3. Drag a tab from the sidebar into the collection, or select **Import** to bring in existing bookmarks.
 
-## Development | 本地开发
+For Toby imports, AetherTab supports both legacy lists/cards and newer spaces/collections/resources exports. Links and collection context are imported; Toby notes and tags are not.
+
+## Your data
+
+Collections and preferences are stored in Chrome storage. Bookmark parsing, categorization, and duplicate detection run on your device. Chrome Sync is optional; sharing a collection exports its name, link titles, and URLs. Weather requests use a city or location, and location permission is requested when you choose location-based weather.
+
+See the [privacy policy](https://aethertab.com/privacy.html) for details.
+
+## Development
 
 ```bash
-npm run icons
 npm install
+npm test
 npm run build
 ```
 
-Load this folder as an unpacked extension in `chrome://extensions/` (Developer mode → Load unpacked). ES modules work without a bundle step.
+Open `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, and select this project folder. The extension uses ES modules and can run without a build step.
 
-Preview the UI without Chrome extension APIs by opening `newtab.html`. Mock tabs and collections load automatically.
+Open `newtab.html` outside extension mode for a visual preview with example data. Run `npm run test:preview` for the browser preview checks, or `npm run promo` to capture promotional assets.
 
-Promo screenshots and tiles:
+Website files live in `docs/`; Chrome Web Store listing copy lives in `store/`.
 
-```bash
-npm run promo
-```
+## Feedback
 
-Site files for Cloudflare Pages live in `docs/`. Store listing paste copy lives in `store/`.
+[Report a bug or suggest a feature](https://github.com/yiyuanlee/AetherTab/issues). Include the steps to reproduce and your Chrome and AetherTab versions when reporting a problem.
 
 ## License
 
-[MIT License](LICENSE)
+[MIT](LICENSE)
